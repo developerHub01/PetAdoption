@@ -57,7 +57,7 @@ const AddPet = () => {
     petLongDescription: Yup.string().required("Required"),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, resetForm) => {
     const petImage = imageRef.current.files[0];
     if (!values || !petImage || !petCategory.value)
       return Swal.fire({
@@ -100,6 +100,8 @@ const AddPet = () => {
               text: "Updated Successfully",
               icon: "success",
             });
+
+            resetForm();
           })
           .catch((error) =>
             Swal.fire({
@@ -136,7 +138,9 @@ const AddPet = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              onSubmit={(values) => handleSubmit(values)}
+              onSubmit={(values, { resetForm }) =>
+                handleSubmit(values, resetForm)
+              }
             >
               <Form className="w-full flex flex-col gap-5 pt-4 text-center">
                 <div className="flex flex-col md:flex-row gap-2">

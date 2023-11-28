@@ -69,14 +69,16 @@ const CategorySection = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h4 className="text-primaryColor capitalize text-2xl font-semibold">
-                {title}
-              </h4>
-              <Link to={path}>
-                <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer">
-                  View All
-                </button>
-              </Link>
+              <div className="w-full flex flex-col">
+                <h4 className="text-primaryColor capitalize text-2xl font-semibold">
+                  {title}
+                </h4>
+                <Link to={path}>
+                  <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer">
+                    View All
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>

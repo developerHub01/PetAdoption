@@ -32,7 +32,7 @@ const Navbar = () => {
   const [menusStatus, setMenuStatus] = useState(false);
   return (
     <div className="bg-primaryColor text-white">
-      <div className="w-[90%] mx-auto py-4 flex justify-between items-center">
+      <div className="w-[90%] mx-auto py-2 flex justify-between items-center">
         <Link
           to="/"
           className="text-2xl select-none capitalize font-bold border-b-4 border-white pb-2"
@@ -62,7 +62,7 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`sidebarPublic w-64 h-screen overflow-hidden bg-white fixed top-0 right-0 z-40 transition-all duration-100 grid place-items-center p-5 ${
+        className={`sidebarPublic shadow-2xl w-64 h-screen overflow-hidden bg-white fixed top-0 right-0 z-40 transition-all duration-100 grid place-items-center p-5 ${
           menusStatus ? "translate-x-0" : "translate-x-full"
         }`}
       >

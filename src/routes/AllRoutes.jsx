@@ -11,6 +11,7 @@ import AddPet from "../Dashboard/AddPet";
 import AllPets from "../Dashboard/AllPets";
 import MyAddedPets from "../Dashboard/MyAddedPets";
 import UpdatePet from "../Dashboard/UpdatePet";
+import PetList from "../pages/PetList";
 
 const routes = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/petlist",
+        element: <PetList />,
       },
       {
         path: "/login",
