@@ -27,7 +27,7 @@ const Users = () => {
     keepPreviousData: true,
   });
   const users = data?.data;
-  const totalUser = data?.totalUser;
+  const totalUser = data?.total;
   if (isLoading) return <h1>Loading..........</h1>;
   if (isError) return <h1>{isError.message}</h1>;
 

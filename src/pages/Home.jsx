@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../customProvider/AuthProvider";
+import CategorySection from "../components/CategorySection/CategorySection";
 
 const Home = () => {
-  const data = useContext(AuthContext);
-  console.log(data);
-  return <div>home</div>;
+  return (
+    <>
+      <CategorySection />
+    </>
+  );
 };
 
 export default Home;

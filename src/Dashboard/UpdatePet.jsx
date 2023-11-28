@@ -2,12 +2,12 @@ import React, { useContext, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../components/Container";
 import { AuthContext } from "../customProvider/AuthProvider";
-import { useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
-import { primaryColor } from "../constant/constant";
+import { primaryColor, serverApi } from "../constant/constant";
 import useFetchPetById from "../useCustomHooks/useFetchPetById";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -35,91 +35,96 @@ const changeColorOpacity = (color, opacity) => {
 const UpdatePet = () => {
   const { _id } = useParams();
   const { data, isLoading } = useFetchPetById(_id);
-  const [newPetCategory, setPetCategory] = useState(options[0]);
-  const imageRef = useRef();
+  const [newPetCategory, setNewPetCategory] = useState(options[0]);
+  const updateImageRef = useRef(null);
   if (isLoading) return <h1>Loadingl........</h1>;
 
-  // const {
-  //   petName,
-  //   petAge,
-  //   petLocation,
-  //   petShortDescription,
-  //   petLongDescription,
-  //   petAuthorEmail,
-  //   petCategory,
-  // } = data;
+  if (!data) return;
 
-  const formik = useFormik({
-    initialValues: {
-      petName: data?.petName,
-      petAge: data?.petAge,
-      petLocation: data?.petLocation,
-      petShortDescription: data?.petShortDescription,
-      petLongDescription: data?.petLongDescription,
-    },
-    validationSchema: Yup.object({
-      petName: Yup.string().required("Required"),
-      petAge: Yup.number().required("Required"),
-      petLocation: Yup.string().required("Required"),
-      petShortDescription: Yup.string().required("Required"),
-      petLongDescription: Yup.string().required("Required"),
-    }),
+  const {
+    petName,
+    petAge,
+    petImage,
+    petLocation,
+    petShortDescription,
+    petLongDescription,
+    petAuthorEmail,
+    petCategory,
+  } = data;
 
-    onSubmit: (values, { resetForm }) => {
-      const petImage = imageRef.current.files[0];
+  const initialValues = {
+    petName,
+    petAge,
+    petLocation,
+    petShortDescription,
+    petLongDescription,
+  };
 
-      if (!values || !petImage || !petCategory.value)
-        return Swal.fire({
+  const validationSchema = Yup.object({
+    petName: Yup.string().required("Required"),
+    petAge: Yup.number().required("Required"),
+    petLocation: Yup.string().required("Required"),
+    petShortDescription: Yup.string().required("Required"),
+    petLongDescription: Yup.string().required("Required"),
+  });
+
+  const handleUpdatePet = (values, res) => {
+    axios
+      .patch(`${serverApi}/pet/${_id}`, {
+        ...values,
+        petImage: res ? res.data.data.url : petImage,
+        petAuthorEmail: petAuthorEmail,
+        petCategory: newPetCategory.value,
+      })
+      .then((res) => {
+        Swal.fire({
+          title: "Success",
+          text: "Updated Successfully",
+          icon: "success",
+        });
+      })
+      .catch((error) =>
+        Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Fill all field",
-        });
+          text: error.message,
+        })
+      );
+  };
 
-      // axios
-      //   .post(
-      //     `https://api.imgbb.com/1/upload?key=${
-      //       import.meta.env.VITE_IMGBB_API_KEY
-      //     }`,
-      //     { image: petImage },
-      //     {
-      //       headers: {
-      //         "Content-Type": "multipart/form-data",
-      //       },
-      //     }
-      //   )
-      //   .then((res) => {
-      //     if (!email) return;
-      //     axios
-      //       .post(`${serverApi}/pet`, {
-      //         ...values,
-      //         petImage: res.data.data.url,
-      //         petAuthorEmail: email,
-      //         petCategory: petCategory.value,
-      //       })
-      //       .then((res) => {
-      //         Swal.fire({
-      //           title: "Success",
-      //           text: "Updated Successfully",
-      //           icon: "success",
-      //         });
-      //       })
-      //       .catch((error) =>
-      //         Swal.fire({
-      //           icon: "error",
-      //           title: "Oops...",
-      //           text: error.message,
-      //         })
-      //       );
-      //   })
-      //   .catch((error) =>
-      //     Swal.fire({
-      //       icon: "error",
-      //       title: "Oops...",
-      //       text: error.message,
-      //     })
-      //   );
-    },
-  });
+  const handleSubmit = (values) => {
+    let petImage = updateImageRef?.current?.files[0];
+    if (!values || !newPetCategory.value)
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Fill all field",
+      });
+    if (!petImage) return handleUpdatePet(values);
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        { image: petImage },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        if (!petAuthorEmail) return;
+        handleUpdatePet(values, res);
+      })
+      .catch((error) =>
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        })
+      );
+  };
   return (
     <section
       className="py-10 bg-white min-h-screen grid place-items-center"
@@ -130,134 +135,109 @@ const UpdatePet = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      {petName}
-      <br />
-      {petAge}
-      <br />
-      {petLocation}
-      <br />
-      {petShortDescription}
-      <br />
-      {petLongDescription}
-      <br />
-      {petAuthorEmail}
-      <br />
-      {petCategory}
-
       <Container mxw="max-w-2xl">
         <div className="w-full h-full py-9 px-5 bg-white/5 shadow-xl backdrop-blur-lg">
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-primaryColor capitalize pb-5 font-headingFont">
             Update Pet
           </h2>
           <div className="w-full max-w-2xl mx-auto flex flex-col gap-5 justify-center text-center">
-            <form
-              className="w-full flex flex-col gap-5 pt-4 text-center"
-              onSubmit={formik.handleSubmit}
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values) => handleSubmit(values)}
             >
-              <div className="flex flex-col md:flex-row gap-2">
-                <div className="w-full">
-                  <input
-                    type="text"
-                    name="petName"
-                    className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
-                    placeholder="Pet name"
-                    {...formik.getFieldProps("petName")}
-                  />
-                  {formik.touched["petName"] && formik.errors["petName"] && (
-                    <div>{formik.errors["petName"]}</div>
-                  )}
+              <Form className="w-full flex flex-col gap-5 pt-4 text-center">
+                <div className="flex flex-col md:flex-row gap-2">
+                  <div className="w-full">
+                    <Field
+                      type="text"
+                      name="petName"
+                      className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                      placeholder="Pet name"
+                    />
+                    <ErrorMessage name="petName" />
+                  </div>
+                  <div className="w-full">
+                    <Field
+                      type="number"
+                      name="petAge"
+                      className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                      placeholder="age"
+                    />
+                    <ErrorMessage name="petAge" />
+                  </div>
                 </div>
-                <div className="w-full">
-                  <input
-                    type="number"
-                    name="petAge"
-                    className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
-                    placeholder="age"
-                    {...formik.getFieldProps("petAge")}
-                  />
-                  {formik.touched["petAge"] && formik.errors["petAge"] && (
-                    <div>{formik.errors["petAge"]}</div>
+
+                <Select
+                  placeholder="category"
+                  className="basic-single text-left"
+                  classNamePrefix="select"
+                  isSearchable={true}
+                  name="petCategory"
+                  options={options}
+                  defaultValue={options.find(
+                    (item) => item.value === petCategory
                   )}
-                </div>
-              </div>
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary: primaryColor,
+                      primary25: changeColorOpacity(primaryColor, 0.5),
+                      neutral80: primaryColor,
+                    },
+                    textAlign: "left",
+                  })}
+                  value={newPetCategory}
+                  onChange={(data) => setNewPetCategory(data)}
+                />
+                <label
+                  htmlFor="updatePetImage"
+                  className="w-full p-2 text-lg bg-primaryColor text-white flex justify-start items-center gap-2"
+                >
+                  <FaImage /> Pet Image...
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="updatePetImage"
+                  className="petImage"
+                  name="petImage"
+                  ref={updateImageRef}
+                  hidden
+                />
 
-              <Select
-                placeholder="category"
-                className="basic-single text-left"
-                classNamePrefix="select"
-                defaultValue={options[0]}
-                isSearchable={true}
-                name="petCategory"
-                options={options}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  colors: {
-                    ...theme.colors,
-                    primary: primaryColor,
-                    primary25: changeColorOpacity(primaryColor, 0.5),
-                    neutral80: primaryColor,
-                  },
-                  textAlign: "left",
-                })}
-                value={petCategory}
-                onChange={(data) => setPetCategory(data)}
-              />
-              <label
-                htmlFor="petImage"
-                className="w-full p-2 text-lg bg-primaryColor text-white flex justify-start items-center gap-2"
-              >
-                <FaImage /> Pet Image...
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                id="petImage"
-                className="petImage"
-                name="petImage"
-                ref={imageRef}
-                hidden
-              />
-
-              <input
-                type="text"
-                name="petLocation"
-                className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
-                placeholder="Pet location"
-                {...formik.getFieldProps("petLocation")}
-              />
-              {formik.touched["petLocation"] &&
-                formik.errors["petLocation"] && (
-                  <div>{formik.errors["petLocation"]}</div>
-                )}
-              <textarea
-                name="petShortDescription"
-                className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[100px]"
-                placeholder="Short Description"
-                {...formik.getFieldProps("petShortDescription")}
-              />
-              {formik.touched["petShortDescription"] &&
-                formik.errors["petShortDescription"] && (
-                  <div>{formik.errors["petShortDescription"]}</div>
-                )}
-              <textarea
-                name="petLongDescription"
-                className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[200px]"
-                placeholder="Long Description"
-                {...formik.getFieldProps("petLongDescription")}
-              />
-              {formik.touched["petLongDescription"] &&
-                formik.errors["petLongDescription"] && (
-                  <div>{formik.errors["petLongDescription"]}</div>
-                )}
-              <button
-                type="submit"
-                className={`self-center flex justify-center items-center gap-3 backdrop-blur-sm capitalize w-full px-4 py-3 bg-primaryColor outline-none text-white placeholder:text-white/80`}
-              >
-                Singup
-                <span className="text-xl"></span>
-              </button>
-            </form>
+                <Field
+                  type="text"
+                  name="petLocation"
+                  className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                  placeholder="Pet location"
+                />
+                <ErrorMessage name="petLocation" />
+                <Field
+                  as="textarea"
+                  name="petShortDescription"
+                  className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[100px]"
+                  placeholder="Short Description"
+                />
+                <ErrorMessage name="petShortDescription" />
+                <Field
+                  as="textarea"
+                  name="petLongDescription"
+                  className="w-full p-2 outline-none text-primaryColor capitalize border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[200px]"
+                  placeholder="Long Description"
+                />
+                <ErrorMessage name="petLongDescription" />
+                <button
+                  type="submit"
+                  className={`self-center flex justify-center items-center gap-3 backdrop-blur-sm capitalize w-full px-4 py-3 bg-primaryColor outline-none text-white placeholder:text-white/80`}
+                >
+                  Singup
+                  <span className="text-xl"></span>
+                </button>
+              </Form>
+            </Formik>
           </div>
         </div>
       </Container>
