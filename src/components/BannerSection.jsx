@@ -12,7 +12,9 @@ const BannerSection = () => {
         <div className="grid lg:grid-cols-2 items-center min-h-[80vh] py-14 gap-7">
           <Container mxw="max-w-lg">
             <div className="flex flex-col gap-4 items-center lg:items-start text-center lg:text-left">
-              <h1 className="text-3xl md:text-5xl font-bold">Find Your Furry Friend</h1>
+              <h1 className="text-3xl md:text-5xl font-bold">
+                Find Your Furry Friend
+              </h1>
               <p className="text-gray-200">
                 Discover the joy of companionship and unconditional love by
                 adopting a pet. Our diverse selection of adorable animals is
@@ -21,7 +23,7 @@ const BannerSection = () => {
                 friendship begin
               </p>
               <Link
-                to="/"
+                to="/petlist"
                 className="text-base bg-white rounded-full text-primaryColor grid place-items-center py-1 px-4 cursor-pointer"
               >
                 View All Category

@@ -69,7 +69,7 @@ const CategorySection = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="w-full flex flex-col">
+              <div className="w-full flex flex-col justify-center items-center gap-3">
                 <h4 className="text-primaryColor capitalize text-2xl font-semibold">
                   {title}
                 </h4>

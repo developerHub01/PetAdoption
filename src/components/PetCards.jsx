@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import "./PetList.css";
+import "./PetCards.css";
 import { Link } from "react-router-dom";
-const PetLIstCards = ({
+const PetCards = ({
   _id,
   petImage,
   petName,
@@ -37,7 +37,7 @@ const PetLIstCards = ({
     <div
       key={_id}
       ref={cardRef}
-      className="w-full h-full shadow-xl grid place-items-center bg-white p-5 gap-2 rounded-xl cursor-pointer hover:scale-95 hover:shadow-2xl opacity-50 scale-50 transition-all duration-150"
+      className="w-full h-full shadow-xl grid place-items-center bg-white p-5 gap-2 rounded-xl cursor-pointer hover:scale-95 hover:shadow-2xl opacity-50 blur-2xl scale-50 transition-all duration-150"
     >
       <div className="w-full aspect-video border-4 border-primaryColor rounded-xl overflow-hidden">
         <img src={petImage} alt="" className="w-full h-full object-cover" />
@@ -63,4 +63,4 @@ const PetLIstCards = ({
   );
 };
 
-export default PetLIstCards;
+export default PetCards;

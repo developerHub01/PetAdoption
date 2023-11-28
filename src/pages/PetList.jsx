@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PetBanner from "../components/PetList/PetBanner";
+import Banner from "../components/Banner";
 import { Form, Field, Formik } from "formik";
 import Select from "react-select";
 import { primaryColor, serverApi } from "../constant/constant";
@@ -8,7 +8,10 @@ import useFetchPets from "../useCustomHooks/useFetchPets";
 import { hashKey, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import PetLIstCards from "../components/PetList/PetLIstCards";
+import PetCards from "../components/PetCards";
+
+const petBannerImg =
+  "https://images.unsplash.com/photo-1496284427489-f59461d8a8e6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 const options = [
   { value: "", label: "none" },
@@ -50,12 +53,6 @@ const PetList = () => {
   if (isLoading) return <h1>Loading........</h1>;
 
   const handleSubmit = ({ searchText }) => {
-    console.log(searchText);
-    console.log(categoryName);
-    console.log(
-      `${serverApi}/petDataByQuery?searchText=${searchText}&petCategory=${categoryName.value}`
-    );
-
     axios
       .get(
         `${serverApi}/petDataByQuery?searchText=${searchText}&petCategory=${categoryName.value}`
@@ -68,7 +65,7 @@ const PetList = () => {
 
   return (
     <section>
-      <PetBanner />
+      <Banner title="Out Pet List" bgImgLink={petBannerImg} />
       <section className="py-12">
         <Container>
           <div className="w-full px-5 py-10 my-5 shadow-xl">
@@ -81,7 +78,7 @@ const PetList = () => {
                   <Field
                     name="searchText"
                     type="text"
-                    className="w-full h-full border-2 border-primaryColor outline-none px-4 py-2 md:py-1 text-primaryColor rounded-t-md md:rounded-s-md"
+                    className="w-full h-full border-2 border-primaryColor outline-none px-4 py-2 md:py-1 text-primaryColor rounded-t-md md:rounded-tl-md md:rounded-tr-none md:rounded-s-md"
                     placeholder="Search what is in your mind..."
                   />
                 </div>
@@ -120,7 +117,7 @@ const PetList = () => {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
             {filteredData.map((item) => (
-              <PetLIstCards key={item._id} {...item} />
+              <PetCards key={item._id} {...item} />
             ))}
           </div>
         </Container>
