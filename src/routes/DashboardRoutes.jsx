@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import DashboardHome from "../Dashboard/DashboardHome";
 
-const DashboardRoutes = () => {
-  return (
-    <>
-      
-    </>
-  )
-}
+const DashboardRoutes = [
+  
+];
 
-export default DashboardRoutes
+export default DashboardRoutes;
