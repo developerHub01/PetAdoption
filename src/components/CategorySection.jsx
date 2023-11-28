@@ -1,6 +1,6 @@
 import React from "react";
-import Heading from "../Heading";
-import Container from "../Container";
+import Heading from "./Heading";
+import Container from "./Container";
 import { Link } from "react-router-dom";
 
 const categoryList = [
@@ -50,10 +50,10 @@ const categoryList = [
 
 const CategorySection = () => {
   return (
-    <section className="py-10 bg-primaryColor text-white">
+    <section className="py-14 bg-primaryColor text-white">
       <Container>
         <Heading
-          heading="Categoy"
+          heading="Category"
           description="This is all of the category of pets we have"
         />
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">

@@ -1,0 +1,4 @@
+.sidebarPublic a.active {
+  background: rgba(63, 65, 26, 1);
+  color: #ffffff;
+}
