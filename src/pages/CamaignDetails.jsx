@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import useFetchPetById from "../useCustomHooks/useFetchPetById";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Banner";
-import Container from "../components/Container";
 import PetDetails from "../components/PetDetails";
 import PetAdoptForm from "../components/PetAdoptForm";
 

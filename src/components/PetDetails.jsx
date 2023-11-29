@@ -35,9 +35,9 @@ const PetDetails = ({
                   <strong className="text-primaryColor">Age:</strong> {petAge}{" "}
                   years
                 </li>
-                <li>
+                <li className="capitalize">
                   <strong className="text-primaryColor">Category:</strong>{" "}
-                  {petCategory} years
+                  {petCategory}
                 </li>
                 <li>
                   <strong className="text-primaryColor">Author Email:</strong>{" "}
@@ -52,7 +52,7 @@ const PetDetails = ({
                   {petShortDescription}
                 </li>
               </ul>
-              <span className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer capitalize">
+              <span className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 capitalize">
                 {petAdoptionStatus ? "Not adopted" : "adopted"}
               </span>
             </div>
