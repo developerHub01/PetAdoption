@@ -57,7 +57,7 @@ const MyAddedPets = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.message,
+          text: error?.response?.data?.message || error.message,
         })
       );
   };
@@ -83,7 +83,7 @@ const MyAddedPets = () => {
             Swal.fire({
               icon: "error",
               title: "Oops...",
-              text: error.message,
+              text: error?.response?.data?.message || error.message,
             })
           );
       }

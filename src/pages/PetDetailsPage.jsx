@@ -19,7 +19,7 @@ const PetDetailsPage = () => {
     <>
       <Banner title={petName} bgImgLink={petImage} />
       <PetDetails {...data} setAdoptFormStateOpen={setAdoptFormStateOpen} />
-      {adoptFormStateOpen && <PetAdoptForm />}
+      {adoptFormStateOpen && <PetAdoptForm petId={_id} setAdoptFormStateOpen={setAdoptFormStateOpen} />}
     </>
   );
 };
