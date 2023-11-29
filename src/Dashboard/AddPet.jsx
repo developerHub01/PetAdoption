@@ -79,14 +79,6 @@ const AddPet = () => {
       )
       .then((res) => {
         if (!email) return;
-
-        console.log({
-          ...values,
-          petImage: res.data.data.url,
-          petAuthorEmail: email,
-          petCategory: petCategory.value,
-        });
-
         axios
           .post(`${serverApi}/pet`, {
             ...values,

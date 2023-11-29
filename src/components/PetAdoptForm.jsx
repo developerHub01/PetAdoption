@@ -47,21 +47,32 @@ const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
 
     axios
       .post(`${serverApi}/adoption`, { ...values, petId })
-      .then((res) => console.log(res.data))
-      .catch((error) =>
+      .then((res) => {
+        Swal.fire({
+          title: "Success",
+          text: "Reqest Sent Successfully",
+          icon: "success",
+        });
+        setAdoptFormStateOpen((prev) => !prev);
+      })
+      .catch((error) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: error?.response?.data?.message || error.message,
-        })
-      );
+        });
+        setAdoptFormStateOpen((prev) => !prev);
+      });
   };
 
   return (
     <section className="fixed top-0 left-0 w-full h-full grid place-items-center bg-black/30 z-50">
       <Container mxw="max-w-2xl">
         <div className="w-full h-full py-9 px-5 bg-white/10 shadow-xl backdrop-blur-xl relative">
-          <HiMiniXMark className="absolute w-10 h-10 text-white grid place-items-center top-3 right-3 cursor-pointer"  onClick={()=> setAdoptFormStateOpen(prev => !prev)}/>
+          <HiMiniXMark
+            className="absolute w-10 h-10 text-white grid place-items-center top-3 right-3 cursor-pointer"
+            onClick={() => setAdoptFormStateOpen((prev) => !prev)}
+          />
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-primaryColor capitalize pb-5 font-headingFont">
             Adopt Pet
           </h2>
