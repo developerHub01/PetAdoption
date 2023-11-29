@@ -1,15 +1,10 @@
 import React, { useContext, useRef } from "react";
-import Container from "../components/Container";
 import { AuthContext } from "../customProvider/AuthProvider";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { FaImage } from "react-icons/fa";
 import { serverApi } from "../constant/constant";
 import Swal from "sweetalert2";
 import axios from "axios";
 import CampaignForm from "./CampaignForm";
-const bgImg =
-  "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 const AddCampaign = () => {
   const {

@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { handleTimeFormatFromUTC, serverApi } from "../constant/constant";
-import Container from "../components/Container";
-import { Link } from "react-router-dom";
+import { serverApi } from "../constant/constant";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { MdDelete } from "react-icons/md";
 import CampaignTable from "./CampaignTable";
 
 const tableHeadingList = [
-  "SN",
-  "Pet name",
-  "Author Email",
-  "Pet Image",
-  "Total Donation",
-  "Max Donation",
-  "Last Date",
+  "sn",
+  "pet name",
+  "author email",
+  "pet image",
+  "total donation",
+  "max donation",
+  "progress",
+  "last date",
   "status",
-  "Action",
-  "Delete",
+  "action",
+  "update",
+  "delete",
 ];
 
 const AllCampaign = () => {
@@ -95,16 +94,19 @@ const AllCampaign = () => {
   };
 
   return (
-    <CampaignTable
-      totalCampaign={totalCampaign}
-      campaignList={campaignList}
-      handleActiveStatus={handleActiveStatus}
-      handleDeleteCampaign={handleDeleteCampaign}
-      numberOfUser={numberOfUser}
-      page={page}
-      setPage={setPage}
-      isPreviousData={isPreviousData}
-    />
+    <div className="py-8">
+      <CampaignTable
+        totalCampaign={totalCampaign}
+        campaignList={campaignList}
+        handleActiveStatus={handleActiveStatus}
+        handleDeleteCampaign={handleDeleteCampaign}
+        numberOfUser={numberOfUser}
+        page={page}
+        setPage={setPage}
+        isPreviousData={isPreviousData}
+        tableHeadingList={tableHeadingList}
+      />
+    </div>
   );
 };
 
