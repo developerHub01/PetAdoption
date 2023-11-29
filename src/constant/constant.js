@@ -24,3 +24,10 @@ export const handleTimeFormatFromUTC = (time) => {
     time[0]
   }`;
 };
+
+export const backgroundImageDefaultStyle = {
+  backgroundAttachment: "fixed",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+};

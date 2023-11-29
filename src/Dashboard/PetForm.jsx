@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../components/Container";
+import { backgroundImageDefaultStyle } from "../constant/constant";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Select from "react-select";
 import { primaryColor } from "../constant/constant";
@@ -39,9 +40,7 @@ const PetForm = ({
       className="py-10 bg-white min-h-screen grid place-items-center"
       style={{
         background: `url('${bgImg}')`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        ...backgroundImageDefaultStyle,
       }}
     >
       <Container mxw="max-w-2xl">

@@ -1,6 +1,6 @@
 import Container from "../components/Container";
 import { Link, useNavigate } from "react-router-dom";
-import { BiSolidLogIn } from "react-icons/bi";
+import { backgroundImageDefaultStyle } from "../constant/constant";
 import { AuthContext } from "../customProvider/AuthProvider";
 import { toast } from "react-toastify";
 import SocialLogin from "../components/SocialLogin";
@@ -33,9 +33,7 @@ const LoginPage = () => {
       className="py-10 bg-white min-h-[80vh]"
       style={{
         background: `url('${bgImg}')`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        ...backgroundImageDefaultStyle,
       }}
     >
       <Container mxw="max-w-2xl">

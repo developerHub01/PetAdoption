@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../components/Container";
+import { backgroundImageDefaultStyle } from "../constant/constant";
 import { FaImage } from "react-icons/fa";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 const bgImg =
@@ -16,9 +17,7 @@ const CampaignForm = ({
       className="py-10 bg-white min-h-screen grid place-items-center"
       style={{
         background: `url('${bgImg}')`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        ...backgroundImageDefaultStyle,
       }}
     >
       <Container mxw="max-w-2xl">

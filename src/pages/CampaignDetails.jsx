@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 import PetDetails from "../components/PetDetails";
 import PetAdoptForm from "../components/PetAdoptForm";
 
-const CamaignDetails = () => {
+const CampaignDetails = () => {
   const { _id } = useParams();
   const { data, isLoading } = useFetchPetById(_id);
 
@@ -18,14 +18,14 @@ const CamaignDetails = () => {
     <>
       <Banner title={petName} bgImgLink={petImage} />
       <PetDetails {...data} setAdoptFormStateOpen={setAdoptFormStateOpen} />
-      {adoptFormStateOpen && (
+      {/* {adoptFormStateOpen && (
         <PetAdoptForm
           petId={_id}
           setAdoptFormStateOpen={setAdoptFormStateOpen}
         />
-      )}
+      )} */}
     </>
   );
 };
 
-export default CamaignDetails;
+export default CampaignDetails;

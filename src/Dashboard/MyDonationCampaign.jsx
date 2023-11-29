@@ -5,6 +5,7 @@ import { serverApi } from "../constant/constant";
 import CampaignTable from "./CampaignTable";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../customProvider/AuthProvider";
+import CampaignDonator from "./CampaignDonator";
 
 const tableHeadingList = [
   "sn",
@@ -22,6 +23,8 @@ const tableHeadingList = [
 
 const MyDonationCampaign = () => {
   const { user } = useContext(AuthContext);
+  const [CampaignDonatorStatusOpen, setCampaignDonatorStatusOpen] =
+    useState(false);
 
   if (!user) return;
   const { email } = user;
@@ -42,7 +45,6 @@ const MyDonationCampaign = () => {
   if (isError) return <h1>{isError.message}</h1>;
   const campaignList = data?.data;
   const totalCampaign = data?.total;
-  console.log(totalCampaign);
 
   const handleActiveStatus = (_id, donationStatusActive) => {
     axios
@@ -76,6 +78,9 @@ const MyDonationCampaign = () => {
         setPage={setPage}
         isPreviousData={isPreviousData}
         tableHeadingList={tableHeadingList}
+      />
+      <CampaignDonator
+        setCampaignDonatorStatusOpen={setCampaignDonatorStatusOpen}
       />
     </div>
   );

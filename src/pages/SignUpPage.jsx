@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Container from "../components/Container.jsx";
+import { backgroundImageDefaultStyle } from "../constant/constant";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { BiSolidLogIn } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +23,7 @@ const bgImg =
 const SignUpPage = () => {
   const { googleSignIn, setUser, signUpUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const handleSignUp = (data) => {
     const { name, profileImg, email, password } = data;
     console.log(data);
@@ -134,9 +135,7 @@ const SignUpPage = () => {
       className="py-10 bg-white min-h-[80vh]"
       style={{
         background: `url('${bgImg}')`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        ...backgroundImageDefaultStyle,
       }}
     >
       <Container mxw="max-w-2xl">

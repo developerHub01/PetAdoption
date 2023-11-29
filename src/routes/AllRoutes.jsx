@@ -18,7 +18,7 @@ import MyAdoptionRequest from "../Dashboard/MyAdoptionRequest";
 import AddCampaign from "../Dashboard/AddCampaign";
 import AllCampaign from "../Dashboard/AllCampaign";
 import MyDonationCampaign from "../Dashboard/MyDonationCampaign";
-import CamaignDetails from "../pages/CamaignDetails";
+import CampaignDetails from "../pages/CampaignDetails";
 import UpdateCampaign from "../Dashboard/UpdateCampaign";
 
 const routes = createBrowserRouter([
@@ -40,7 +40,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/campaign/:_id",
-        element: <CamaignDetails />,
+        element: <CampaignDetails />,
       },
       {
         path: "/petdetails/:_id",
