@@ -1,8 +1,7 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../components/Container";
-import { AuthContext } from "../customProvider/AuthProvider";
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import Select from "react-select";

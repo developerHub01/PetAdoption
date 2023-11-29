@@ -1,38 +1,35 @@
 import React from "react";
 import Container from "../components/Container";
-import { handleTimeFormatFromUTC } from "../constant/constant";
-import { GrUpdate } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { GrUpdate } from "react-icons/gr";
 
 const tableHeadingList = [
-  "SN",
-  "Pet name",
+  "pet Image",
   "Author Email",
-  "Pet Image",
-  "Total Donation",
-  "Max Donation",
-  "Last Date",
-  "status",
-  "Action",
+  "pet Name",
+  "pet Age",
+  "pet Category",
+  "pet Status",
+  "Adoption Action",
+  "Remove",
   "Update",
-  "Delete",
 ];
-const CampaignTable = ({
-  totalCampaign,
-  campaignList,
-  handleActiveStatus,
-  handleDeleteCampaign,
-  numberOfUser,
-  page,
+const PetListTable = ({
+  pets,
+  totalPet,
   setPage,
+  page,
+  numberOfUser,
   isPreviousData,
+  handleChangePetAdoptionStatus,
+  handlePetDelete,
 }) => {
   return (
     <div className="py-8">
       <Container>
         <h1 className="text-2xl text-center font-bold text-primaryColor">
-          Campaign List ({totalCampaign})
+          Pet List ({totalPet})
         </h1>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm rtl:text-right text-white text-center rounded-md overflow-hidden">
@@ -46,39 +43,25 @@ const CampaignTable = ({
               </tr>
             </thead>
             <tbody>
-              {campaignList.map(
-                (
-                  {
-                    _id,
-                    petName,
-                    donationAuthorEmail,
-                    petImage,
-                    maxDonationAmount,
-                    donatedAmount,
-                    lastDate,
-                    donationStatusActive,
-                  },
-                  key
-                ) => (
+              {pets.map(
+                ({
+                  _id,
+                  petImage,
+                  petAuthorEmail,
+                  petAge,
+                  petName,
+                  petCategory,
+                  petAdoptionStatus,
+                }) => (
                   <tr
                     key={_id}
-                    className={`bg-white text-primaryColor hover:bg-primaryColor/5 border-primaryColor/20 border-b`}
+                    className="bg-white text-primaryColor hover:bg-primaryColor/5 border-primaryColor/20 border-b"
                   >
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {key + 1}
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      <Link to="/" className="underline">
-                        {petName}
-                      </Link>
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
-                      {donationAuthorEmail}
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap grid place-items-center">
                       <Link
-                        to="/"
-                        className="block w-10 h-10 rounded-full overflow-hidden border-2 border-primaryColor"
+                        to={`/petdetails/${_id}`}
+                        target="_blank"
+                        className="block w-10 h-10 rounded-full overflow-hidden border-2 border-primaryColor mx-auto"
                       >
                         <img
                           src={petImage}
@@ -87,44 +70,56 @@ const CampaignTable = ({
                         />
                       </Link>
                     </td>
-
-                    <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {donatedAmount}
+                    <td className="px-6 py-3 whitespace-nowrap">
+                      {petAuthorEmail}
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap capitalize underline">
+                      <Link to={`/petdetails/${_id}`} target="_blank">
+                        {petName}
+                      </Link>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {maxDonationAmount}
+                      {petAge}
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {handleTimeFormatFromUTC(lastDate)}
+                      {petCategory}
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {donationStatusActive ? "Active" : "Paused"}
+                      {petAdoptionStatus ? (
+                        <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto">
+                          Unadopted
+                        </button>
+                      ) : (
+                        <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto">
+                          Adopted
+                        </button>
+                      )}
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       <button
-                        className="px-3 py-1 text-base bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
-                        onClick={() =>
-                          handleActiveStatus(_id, donationStatusActive)
-                        }
+                        className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto"
+                        onClick={() => handleChangePetAdoptionStatus(_id)}
                       >
-                        {donationStatusActive ? "Pause" : "Active"}
+                        {petAdoptionStatus
+                          ? "Change to Adopt"
+                          : "Change to Unadopt"}
+                      </button>
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap capitalize">
+                      <button
+                        className="w-9 h-9 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
+                        onClick={() => handlePetDelete(_id)}
+                      >
+                        <FaTrash />
                       </button>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       <Link
-                        to="/"
+                        to={`/dashboard/update/${_id}`}
                         className="w-9 h-9 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
                       >
                         <GrUpdate />
                       </Link>
-                    </td>
-                    <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      <button
-                        className="w-9 h-9 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
-                        onClick={() => handleDeleteCampaign(_id)}
-                      >
-                        <FaTrash />
-                      </button>
                     </td>
                   </tr>
                 )
@@ -144,8 +139,7 @@ const CampaignTable = ({
           <span className="text-primaryColor">Current Page: {page + 1}</span>
           <button
             className={`text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer ${
-              (isPreviousData ||
-                totalCampaign - (page + 1) * numberOfUser <= 0) &&
+              (isPreviousData || totalPet - (page + 1) * numberOfUser <= 0) &&
               "pointer-events-none opacity-50"
             }`}
             onClick={() => !isPreviousData && setPage((old) => old + 1)}
@@ -158,4 +152,4 @@ const CampaignTable = ({
   );
 };
 
-export default CampaignTable;
+export default PetListTable;
