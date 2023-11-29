@@ -108,7 +108,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="myadoptionrequest"
                 className="w-full py-1 px-3 bg-primaryColor block rounded-md"
               >
                 Adoption Request

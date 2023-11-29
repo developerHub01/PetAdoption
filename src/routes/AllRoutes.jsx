@@ -14,6 +14,7 @@ import UpdatePet from "../Dashboard/UpdatePet";
 import PetList from "../pages/PetList";
 import CategoryPage from "../pages/CategoryPage";
 import PetDetailsPage from "../pages/PetDetailsPage";
+import MyAdoptionRequest from "../Dashboard/MyAdoptionRequest";
 
 const routes = createBrowserRouter([
   {
@@ -73,7 +74,10 @@ const routes = createBrowserRouter([
       {
         path: "update/:_id",
         element: <UpdatePet />,
-        // element: <h1 className="text-red-700 text-6xl">Hello</h1>,
+      },
+      {
+        path: "myadoptionrequest",
+        element: <MyAdoptionRequest />,
       },
     ],
   },

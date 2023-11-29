@@ -9,26 +9,26 @@ const PetCards = ({
   petCategory,
   petLocation,
 }) => {
-  const cardRef = useRef(null);
+  const cardRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (items) => {
         items.forEach((item) => {
-          if (item.isIntersecting) cardRef.current.classList.add("activeAnim");
-          else cardRef.current.classList.remove("activeAnim");
+          if (item.isIntersecting) cardRef?.current?.classList.add("activeAnim");
+          else cardRef?.current?.classList.remove("activeAnim");
         });
       },
       { threshold: 0.2 }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
+    if (cardRef?.current) {
+      observer.observe(cardRef?.current);
     }
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+      if (cardRef?.current) {
+        observer.unobserve(cardRef?.current);
       }
     };
   }, []);
