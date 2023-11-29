@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Container from "../components/Container";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import useFetchPets from "../useCustomHooks/useFetchPets";
 import Select from "react-select";
 import { FaImage } from "react-icons/fa";
 import { primaryColor, serverApi } from "../constant/constant";

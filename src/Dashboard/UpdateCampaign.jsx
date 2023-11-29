@@ -7,24 +7,39 @@ import { FaImage } from "react-icons/fa";
 import { serverApi } from "../constant/constant";
 import Swal from "sweetalert2";
 import axios from "axios";
-import CampaignForm from "./CampaignForm";
-const bgImg =
-  "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-const AddCampaign = () => {
+import { useParams } from "react-router-dom";
+import useFetchCampaignById from "../useCustomHooks/useFetchCampaignById";
+import CampaignForm from "./CampaignForm";
+
+const UpdateCampaign = () => {
+  const { _id } = useParams();
   const {
     user: { email },
   } = useContext(AuthContext);
   const imageRef = useRef(null);
+  const { data, isLoading } = useFetchCampaignById(_id);
+
+  if (isLoading) return <h1>Loading.......</h1>;
+  const {
+    petName,
+    petImage,
+    maxDonationAmount,
+    lastDate,
+    petShortDescription,
+    petLongDescription,
+  } = data;
+
+  console.log(data);
 
   if (!email) return;
 
   const initialValues = {
-    petName: "",
-    maxDonationAmount: "",
-    lastDate: "",
-    petShortDescription: "",
-    petLongDescription: "",
+    petName,
+    maxDonationAmount,
+    lastDate: lastDate.split("T")[0],
+    petShortDescription,
+    petLongDescription,
   };
 
   const validationSchema = Yup.object({
@@ -35,16 +50,40 @@ const AddCampaign = () => {
     petLongDescription: Yup.string().required("Required"),
   });
 
+  const handleUpdate = (values, res) => {
+    axios
+      .patch(`${serverApi}/campaign`, {
+        _id,
+        ...values,
+        petImage: res?.data?.data?.url || petImage,
+        donationAuthorEmail: email,
+      })
+      .then((res) => {
+        Swal.fire({
+          title: "Success",
+          text: "Campaign Created Successfully",
+          icon: "success",
+        });
+      })
+      .catch((error) =>
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error?.response?.data?.message || error.message,
+        })
+      );
+  };
+
   const handleSubmit = (values, resetForm) => {
-    const petImage = imageRef.current.files[0];
-    if (!values || !petImage)
+    const newPetImage = imageRef?.current?.files[0];
+    if (!values)
       return Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Fill all field",
       });
 
-    console.log(values, petImage);
+    if (newPetImage) handleUpdate(values);
     axios
       .post(
         `https://api.imgbb.com/1/upload?key=${
@@ -59,28 +98,7 @@ const AddCampaign = () => {
       )
       .then((res) => {
         if (!email) return;
-        axios
-          .post(`${serverApi}/campaign`, {
-            ...values,
-            petImage: res?.data?.data?.url,
-            donationAuthorEmail: email,
-          })
-          .then((res) => {
-            Swal.fire({
-              title: "Success",
-              text: "Campaign Created Successfully",
-              icon: "success",
-            });
-
-            resetForm();
-          })
-          .catch((error) =>
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: error?.response?.data?.message || error.message,
-            })
-          );
+        handleUpdate(values, res);
       })
       .catch((error) =>
         Swal.fire({
@@ -96,9 +114,9 @@ const AddCampaign = () => {
       validationSchema={validationSchema}
       handleSubmit={handleSubmit}
       imageRef={imageRef}
-      prefix="Add"
+      prefix="Update"
     />
   );
 };
 
-export default AddCampaign;
+export default UpdateCampaign;

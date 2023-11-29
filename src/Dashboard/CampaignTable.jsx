@@ -68,7 +68,11 @@ const CampaignTable = ({
                       {key + 1}
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      <Link to="/" className="underline">
+                      <Link
+                        to={`/campaign/${_id}`}
+                        target="_blank"
+                        className="underline"
+                      >
                         {petName}
                       </Link>
                     </td>
@@ -77,7 +81,8 @@ const CampaignTable = ({
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap grid place-items-center">
                       <Link
-                        to="/"
+                        to={`/campaign/${_id}`}
+                        target="_blank"
                         className="block w-10 h-10 rounded-full overflow-hidden border-2 border-primaryColor"
                       >
                         <img
@@ -112,7 +117,7 @@ const CampaignTable = ({
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       <Link
-                        to="/"
+                        to={`/dashboard/campaign/update/${_id}`}
                         className="w-9 h-9 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
                       >
                         <GrUpdate />

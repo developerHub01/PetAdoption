@@ -115,7 +115,7 @@ const PetListTable = ({
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       <Link
-                        to={`/dashboard/update/${_id}`}
+                        to={`/dashboard/pet/update/${_id}`}
                         className="w-9 h-9 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
                       >
                         <GrUpdate />
