@@ -84,18 +84,26 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
-                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
-              >
-                All Donations
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
                 to="addpet"
                 className="w-full py-1 px-3 bg-primaryColor block rounded-md"
               >
                 Add a pet
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="allcampaign"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                All Campaign
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="mycampaign"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                My Campaign
               </NavLink>
             </li>
             <li>
@@ -120,6 +128,14 @@ const Sidebar = () => {
                 className="w-full py-1 px-3 bg-primaryColor block rounded-md"
               >
                 My Donations
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="addcampaign"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                Add Campaign
               </NavLink>
             </li>
           </ul>

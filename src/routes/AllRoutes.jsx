@@ -15,6 +15,9 @@ import PetList from "../pages/PetList";
 import CategoryPage from "../pages/CategoryPage";
 import PetDetailsPage from "../pages/PetDetailsPage";
 import MyAdoptionRequest from "../Dashboard/MyAdoptionRequest";
+import AddCampaign from "../Dashboard/AddCampaign";
+import AllCampaign from "../Dashboard/AllCampaign";
+import MyDonationCampaign from "../Dashboard/MyDonationCampaign";
 
 const routes = createBrowserRouter([
   {
@@ -78,6 +81,18 @@ const routes = createBrowserRouter([
       {
         path: "myadoptionrequest",
         element: <MyAdoptionRequest />,
+      },
+      {
+        path: "addcampaign",
+        element: <AddCampaign />,
+      },
+      {
+        path: "allcampaign",
+        element: <AllCampaign />,
+      },
+      {
+        path: "mycampaign",
+        element: <MyDonationCampaign />,
       },
     ],
   },
