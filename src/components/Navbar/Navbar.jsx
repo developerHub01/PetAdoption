@@ -22,6 +22,11 @@ const menuList = [
     loggedOrNot: true,
   },
   {
+    path: "/dashboard",
+    text: "Dashboard",
+    loggedOrNot: true,
+  },
+  {
     path: "/login",
     text: "Login",
     loggedOrNot: true,

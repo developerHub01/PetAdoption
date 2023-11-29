@@ -13,6 +13,7 @@ import { AuthContext } from "../customProvider/AuthProvider";
 const tableHeadingList = [
   "pet Image",
   "Author Email",
+  "pet Name",
   "pet Age",
   "pet Category",
   "pet Status",
@@ -94,7 +95,7 @@ const MyAddedPets = () => {
     <div className="py-8">
       <Container>
         <h1 className="text-2xl text-center font-bold text-primaryColor">
-          Users List ({data.length})
+          Users List ({totalPet})
         </h1>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm rtl:text-right text-white text-center rounded-md overflow-hidden">
@@ -113,6 +114,7 @@ const MyAddedPets = () => {
                   _id,
                   petImage,
                   petAuthorEmail,
+                  petName,
                   petAge,
                   petCategory,
                   petAdoptionStatus,
@@ -122,16 +124,25 @@ const MyAddedPets = () => {
                     className="bg-white text-primaryColor hover:bg-primaryColor/5 border-primaryColor/20 border-b"
                   >
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primaryColor mx-auto">
+                      <Link
+                        to={`/petdetails/${_id}`}
+                        target="_blank"
+                        className="block w-10 h-10 rounded-full overflow-hidden border-2 border-primaryColor mx-auto"
+                      >
                         <img
                           src={petImage}
                           alt=""
                           className="w-full h-full object-cover"
                         />
-                      </div>
+                      </Link>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap">
                       {petAuthorEmail}
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap capitalize underline">
+                      <Link to={`/petdetails/${_id}`} target="_blank">
+                        {petName}
+                      </Link>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       {petAge}

@@ -84,7 +84,7 @@ const Users = () => {
     <div className="py-8">
       <Container>
         <h1 className="text-2xl text-center font-bold text-primaryColor">
-          Users List ({data.length})
+          Users List ({totalUser})
         </h1>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm rtl:text-right text-white text-center rounded-md overflow-hidden">

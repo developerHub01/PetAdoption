@@ -41,7 +41,7 @@ const PetDetails = ({
                 </li>
                 <li>
                   <strong className="text-primaryColor">Author Email:</strong>{" "}
-                  {petAuthorEmail} years
+                  {petAuthorEmail}
                 </li>
                 <li>
                   <strong className="text-primaryColor">Location:</strong>{" "}
