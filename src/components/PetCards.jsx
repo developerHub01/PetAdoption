@@ -53,7 +53,7 @@ const PetCards = ({
           <strong className="text-primaryColor">Location:</strong>{" "}
           {petLocation.slice(0, 30)}
         </p>
-        <Link to="/">
+        <Link to={`/petdetails/${_id}`}>
           <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer">
             View Details
           </button>

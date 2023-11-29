@@ -13,6 +13,7 @@ import MyAddedPets from "../Dashboard/MyAddedPets";
 import UpdatePet from "../Dashboard/UpdatePet";
 import PetList from "../pages/PetList";
 import CategoryPage from "../pages/CategoryPage";
+import PetDetailsPage from "../pages/PetDetailsPage";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
       {
         path: "/category/:category",
         element: <CategoryPage />,
+      },
+      {
+        path: "/petdetails/:_id",
+        element: <PetDetailsPage />,
       },
       {
         path: "/login",
