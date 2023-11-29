@@ -14,19 +14,7 @@ const PetDetailsPage = () => {
 
   if (isLoading) return <h1>Loading...........</h1>;
 
-  console.log(data);
-  const {
-    date,
-    petAdoptionStatus,
-    petAge,
-    petAuthorEmail,
-    petCategory,
-    petImage,
-    petLocation,
-    petLongDescription,
-    petName,
-    petShortDescription,
-  } = data;
+  const { petImage, petName } = data;
   return (
     <>
       <Banner title={petName} bgImgLink={petImage} />
