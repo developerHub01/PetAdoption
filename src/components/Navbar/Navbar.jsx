@@ -6,7 +6,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import "./Navbar.css";
 import { AuthContext } from "../../customProvider/AuthProvider";
 
-const menuList = [
+const publicMenuList = [
   {
     path: "/",
     text: "home",
@@ -19,19 +19,17 @@ const menuList = [
   },
   {
     path: "/petlist",
-    text: "pet listing",
+    text: "pet list",
     loggedOrNot: null,
   },
   {
     path: "/campaign",
-    text: "campaign listing",
+    text: "campaign list",
     loggedOrNot: null,
   },
-  {
-    path: "/donations",
-    text: "donation campaigns",
-    loggedOrNot: true,
-  },
+];
+
+const privateMenuList = [
   {
     path: "/dashboard",
     text: "dashboard",
