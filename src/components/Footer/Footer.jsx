@@ -24,7 +24,7 @@ const socialIcons = [
 
 const Footer = () => {
   return (
-    <footer className="p-4 md:p-8 lg:p-14 bg-primaryColor">
+    <footer className="p-4 md:p-8 lg:p-14 bg-primaryColor shadow-2xl drop-shadow-2xl">
       <Container>
         <div className="w-full max-w-3xl mx-auto text-center">
           <Link
