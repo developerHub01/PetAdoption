@@ -2,6 +2,7 @@ import React from "react";
 import Container from "./Container";
 import Heading from "./Heading";
 import { galleryData } from "../constant/constant";
+import InfiniteScrollCard from "./InfiniteScrollCard";
 
 const GallerySection = () => {
   return (
@@ -14,12 +15,11 @@ const GallerySection = () => {
         />
         <div className="w-full sm:columns-2 md:columns-3 gap-5 overflow-hidden">
           {galleryData.map((item, i) => (
-            <div
-              key={i}
-              className="w-full rounded-md shadow-xl mb-5 overflow-hidden"
-            >
-              <img src={item} alt="" className="w-full h-full object-cover" />
-            </div>
+            <InfiniteScrollCard key={i}>
+              <div className="w-full rounded-xl shadow-xl mb-5 overflow-hidden cursor-pointer border-4 border-transparent hover:border-white">
+                <img src={item} alt="" className="w-full h-full object-cover" />
+              </div>
+            </InfiniteScrollCard>
           ))}
         </div>
       </Container>
