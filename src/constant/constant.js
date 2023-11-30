@@ -1,5 +1,3 @@
-import Swal from "sweetalert2";
-
 export const serverApi = "http://localhost:5000";
 export const primaryColor = "rgba(63, 65, 26, 1)";
 export const secondaryColor = "#ffffff";
@@ -17,6 +15,7 @@ export const months = [
   "Nov",
   "Dec",
 ];
+Object.freeze(months);
 
 export const handleTimeFormatFromUTC = (time) => {
   time = time.split("T")[0].split("-");
@@ -31,6 +30,7 @@ export const backgroundImageDefaultStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
 };
+Object.freeze(backgroundImageDefaultStyle);
 
 export const options = [
   { value: "dog", label: "Dog" },
@@ -41,6 +41,7 @@ export const options = [
   { value: "hedgehog", label: "Hedgehog" },
   { value: "bird", label: "Bird" },
 ];
+Object.freeze(options);
 
 //"rgba(63, 65, 26, 1)"
 export const changeColorOpacity = (color, opacity) => {
@@ -94,6 +95,7 @@ export const categoryList = [
     title: "bird",
   },
 ];
+Object.freeze(categoryList);
 
 export const aboutCardList = [
   "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -101,3 +103,20 @@ export const aboutCardList = [
   "https://images.unsplash.com/photo-1497671954146-59a89ff626ff?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1574671652898-fc04f34c7517?q=80&w=1524&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
+Object.freeze(aboutCardList);
+
+export const galleryData = [
+  "https://images.unsplash.com/photo-1602979677071-1781b7f40023?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1556347272-2dd5e7eaa955?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1609151354448-c4a53450c6e9?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1603805167397-892be3fc3090?q=80&w=1580&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHBldHxlbnwwfHwwfHx8MA%3D%3D",
+  "https://images.unsplash.com/photo-1557129430-a1fc6dcd2ab6?q=80&w=1495&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1625794084867-8ddd239946b1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/flagged/photo-1556347272-2dd5e7eaa955?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1573435567032-ff5982925350?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1658938822127-44b96082ddf6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fHw%3D",
+  "https://images.unsplash.com/photo-1589933767411-38a58367efd7?q=80&w=1458&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+Object.freeze(galleryData);

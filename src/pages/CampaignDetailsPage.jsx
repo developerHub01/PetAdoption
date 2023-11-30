@@ -9,6 +9,7 @@ import CampaignRecommendation from "../components/CampaignRecommendation";
 import Container from "../components/Container";
 import Heading from "../components/Heading";
 import PetCampaignForm from "../components/PetCampaignForm";
+import Loader from "../components/Loader";
 
 const CampaignDetailsPage = () => {
   const { _id } = useParams();
@@ -16,10 +17,9 @@ const CampaignDetailsPage = () => {
 
   const [campaignFormStateOpen, setCampaignFormStateOpen] = useState(false);
 
-  if (isLoading) return <h1>Loading...........</h1>;
+  if (isLoading) return <Loader />;
 
   const { petImage, petName } = data;
-  console.log(data);
   return (
     <>
       <Banner title={petName} bgImgLink={petImage} />

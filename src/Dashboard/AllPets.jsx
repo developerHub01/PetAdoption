@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import Swal from "sweetalert2";
 import PetListTable from "./PetListTable";
+import Loader from "../components/Loader";
 
 const tableHeadingList = [
   "pet Image",
@@ -36,7 +37,7 @@ const AllPets = () => {
   });
   const pets = data?.data;
   const totalPet = data?.total;
-  if (isLoading) return <h1>Loading..........</h1>;
+  if (isLoading) return <Loader />;
   if (isError) return <h1>{isError.message}</h1>;
 
   const handleChangePetAdoptionStatus = (_id) => {

@@ -2,7 +2,7 @@ import React from "react";
 import Container from "../components/Container";
 import { handleTimeFormatFromUTC } from "../constant/constant";
 import { GrUpdate } from "react-icons/gr";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { BiDollar } from "react-icons/bi";
 

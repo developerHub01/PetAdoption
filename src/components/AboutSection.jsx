@@ -21,7 +21,10 @@ const AboutSection = () => {
             />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 h-full">
               {aboutCardList.map((item, i) => (
-                <div className="w-full h-full overflow-hidden rounded-md shadow-xl">
+                <div
+                  key={i}
+                  className="w-full h-full overflow-hidden rounded-md shadow-xl"
+                >
                   <img
                     src={item}
                     alt=""

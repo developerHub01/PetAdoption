@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import Container from "../components/Container";
 import PetDetails from "../components/PetDetails";
 import PetAdoptForm from "../components/PetAdoptForm";
+import Loader from "../components/Loader";
 
 const PetDetailsPage = () => {
   const { _id } = useParams();
@@ -12,7 +13,7 @@ const PetDetailsPage = () => {
 
   const [adoptFormStateOpen, setAdoptFormStateOpen] = useState(false);
 
-  if (isLoading) return <h1>Loading...........</h1>;
+  if (isLoading) return <Loader />;
 
   const { petImage, petName } = data;
   return (

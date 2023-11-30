@@ -9,7 +9,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <section className="w-full mt-16">
+        <Outlet />
+      </section>
       <Footer />
       <ToastContainer />
     </>

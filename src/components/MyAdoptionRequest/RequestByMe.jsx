@@ -15,8 +15,6 @@ const tableHeadingList = [
 
 const RequestByMe = ({ data, refetch }) => {
   const handleRemove = (_id) => {
-    console.log("====================");
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

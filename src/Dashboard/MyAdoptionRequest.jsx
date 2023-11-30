@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../customProvider/AuthProvider";
-import useFetchAdoptionListSendByMe from "../useCustomHooks/useFetchAdoptionListSendByMe";
 import { useQuery } from "@tanstack/react-query";
 import { serverApi } from "../constant/constant";
 import Container from "../components/Container";
 import RequestByMe from "../components/MyAdoptionRequest/RequestByMe";
 import RequestToMe from "../components/MyAdoptionRequest/RequestToMe";
+import Loader from "../components/Loader";
 
 const MyAdoptionRequest = () => {
   const { user } = useContext(AuthContext);
@@ -34,9 +34,7 @@ const MyAdoptionRequest = () => {
   });
 
   if (allRequestByMeIsLoading || allRequestToMeIsLoading)
-    return <h1>Loading........</h1>;
-
-  console.log(allRequestToMe);
+    return <Loader />;
 
   return (
     <section className="py-14">

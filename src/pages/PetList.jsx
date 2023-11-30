@@ -2,40 +2,24 @@ import React, { useState } from "react";
 import Banner from "../components/Banner";
 import { Form, Field, Formik } from "formik";
 import Select from "react-select";
-import { primaryColor, serverApi } from "../constant/constant";
+import {
+  changeColorOpacity,
+  options,
+  primaryColor,
+  serverApi,
+} from "../constant/constant";
 import Container from "../components/Container";
-import useFetchPets from "../useCustomHooks/useFetchPets";
-import { hashKey, useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import PetCards from "../components/PetCards";
+import Loader from "../components/Loader";
 
 const petBannerImg =
   "https://images.unsplash.com/photo-1496284427489-f59461d8a8e6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-const options = [
-  { value: "", label: "none" },
-  { value: "dog", label: "Dog" },
-  { value: "cat", label: "Cat" },
-  { value: "rabbit", label: "Rabbit" },
-  { value: "hamster", label: "Hamster" },
-  { value: "fish", label: "Fish" },
-  { value: "hedgehog", label: "Hedgehog" },
-  { value: "bird", label: "Bird" },
-];
-
-//"rgba(63, 65, 26, 1)"
-const changeColorOpacity = (color, opacity) => {
-  color = color.split(",");
-  color[color.length - 1] = opacity + ")";
-  color = color.join(",");
-  return color;
-};
-
 const PetList = () => {
-  const [categoryName, setCategoryName] = useState(options[0]);
-
-  const [allData, setAllData] = useState([]);
+  const petListOptions = [{ value: "", label: "All" }, ...options];
+  const [categoryName, setCategoryName] = useState(petListOptions[0]);
   const [filteredData, setFilteredData] = useState([]);
 
   const { data, isLoading } = useQuery({
@@ -44,25 +28,22 @@ const PetList = () => {
       fetch(`${serverApi}/pet`)
         .then((res) => res.json())
         .then((data) => {
-          setAllData((prev) => data.data);
-          setFilteredData((prev) => data.data);
-          return data.data;
+          const responseData = data.data;
+          setFilteredData((prev) => responseData);
+          return responseData;
         }),
   });
 
-  if (isLoading) return <h1>Loading........</h1>;
+  if (isLoading) return <Loader />;
 
   const handleSubmit = ({ searchText }) => {
     axios
       .get(
         `${serverApi}/petDataByQuery?searchText=${searchText}&petCategory=${categoryName.value}`
       )
-      .then((res) => {
-        console.log(res.data);
-        setFilteredData((prev) => res.data);
-      });
+      .then((res) => res.data)
+      .then((data) => setFilteredData((prev) => data));
   };
-
   return (
     <section>
       <Banner title="Out Pet List" bgImgLink={petBannerImg} />
@@ -90,7 +71,7 @@ const PetList = () => {
                     defaultValue={categoryName}
                     isSearchable={true}
                     name="category"
-                    options={options}
+                    options={petListOptions}
                     theme={(theme) => ({
                       ...theme,
                       borderRadius: 0,

@@ -3,7 +3,6 @@ import CategorySection from "../components/CategorySection";
 import Banner from "../components/Banner";
 import { categoryList } from "../constant/constant";
 
-console.log(categoryList);
 const AllCategoryPage = () => {
   return (
     <>

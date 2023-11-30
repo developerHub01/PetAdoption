@@ -5,6 +5,7 @@ import { HiBars3BottomRight } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
 import "./Navbar.css";
 import { AuthContext } from "../../customProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const publicMenuList = [
   {
@@ -29,24 +30,23 @@ const publicMenuList = [
   },
 ];
 
-const privateMenuList = [
-  {
-    path: "/dashboard",
-    text: "dashboard",
-    loggedOrNot: true,
-  },
-  {
-    path: "/login",
-    text: "login",
-    loggedOrNot: false,
-  },
-];
-
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   const [menusStatus, setMenuStatus] = useState(false);
+
+  const handleLogOut = () => {
+    signOutUser();
+    setMenuStatus((prev) => false);
+    Swal.fire({
+      icon: "success",
+      title: "Logout successful",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   return (
-    <div className="bg-primaryColor text-white">
+    <div className="fixed top-0 left-0 w-full z-50 shadow-2xl h-16 grid place-items-center bg-primaryColor text-white">
       <div className="w-[90%] mx-auto py-2 flex justify-between items-center">
         <Link
           to="/"
@@ -54,19 +54,22 @@ const Navbar = () => {
         >
           PetAdopt
         </Link>
+
         <div className="flex justify-center items-center gap-4">
-          <Link
-            to="/dashboard"
-            className="cart w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-2xl rounded-full relative"
-          >
-            {/* TODO cart Number */}
-            <span className="cartNumber bg-red-600 text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
-              5
-            </span>
-            <div>
-              <FaCartShopping />
-            </div>
-          </Link>
+          {user && (
+            <Link
+              to="/dashboard"
+              className="cart w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-2xl rounded-full relative"
+            >
+              {/* TODO cart Number */}
+              <span className="cartNumber bg-red-600 text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
+                5
+              </span>
+              <div>
+                <FaCartShopping />
+              </div>
+            </Link>
+          )}
           <button
             onClick={() => setMenuStatus((prev) => !prev)}
             className="w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-3xl rounded-full"
@@ -89,16 +92,48 @@ const Navbar = () => {
         </div>
 
         <ul className="text-primaryColor py-5 flex flex-col gap-3 w-full">
-          {menuList.map(({ path, text, loggedOrNot }) => (
+          {publicMenuList.map(({ path, text }) => (
             <li key={path} className="w-full">
               <NavLink
                 to={path}
                 className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full capitalize"
+                onClick={() => setMenuStatus((prev) => false)}
               >
                 {text}
               </NavLink>
             </li>
           ))}
+          {user ? (
+            <>
+              <li className="w-full">
+                <NavLink
+                  to="/dashboard"
+                  className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full capitalize"
+                  onClick={() => setMenuStatus((prev) => false)}
+                >
+                  dashboard
+                </NavLink>
+              </li>
+              <li className="w-full">
+                <button
+                  className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full capitalize text-left"
+                  onClick={() => handleLogOut()}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="w-full">
+              <NavLink
+                to="/login"
+                className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full capitalize"
+                onClick={() => setMenuStatus((prev) => !prev)}
+              >
+                login
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>

@@ -10,18 +10,7 @@ import { GrUpdate } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../customProvider/AuthProvider";
 import PetListTable from "./PetListTable";
-
-const tableHeadingList = [
-  "pet Image",
-  "Author Email",
-  "pet Name",
-  "pet Age",
-  "pet Category",
-  "pet Status",
-  "Adoption Action",
-  "Remove",
-  "Update",
-];
+import Loader from "../components/Loader";
 
 const MyAddedPets = () => {
   const {
@@ -40,7 +29,7 @@ const MyAddedPets = () => {
   });
   const pets = data?.data;
   const totalPet = data?.total;
-  if (isLoading) return <h1>Loading..........</h1>;
+  if (isLoading) return <Loader />;
   if (isError) return <h1>{isError.message}</h1>;
 
   const handleChangePetAdoptionStatus = (_id) => {

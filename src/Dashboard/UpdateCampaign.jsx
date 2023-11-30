@@ -11,6 +11,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import useFetchCampaignById from "../useCustomHooks/useFetchCampaignById";
 import CampaignForm from "./CampaignForm";
+import Loader from "../components/Loader";
 
 const UpdateCampaign = () => {
   const { _id } = useParams();
@@ -20,7 +21,7 @@ const UpdateCampaign = () => {
   const imageRef = useRef(null);
   const { data, isLoading } = useFetchCampaignById(_id);
 
-  if (isLoading) return <h1>Loading.......</h1>;
+  if (isLoading) return <Loader />;
   const {
     petName,
     petImage,

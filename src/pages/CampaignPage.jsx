@@ -4,12 +4,12 @@ import useFetchCampaignList from "../useCustomHooks/useFetchCampaignList";
 import InfiniteScrollCard from "../components/InfiniteScrollCard";
 import CampaignCard from "../components/CampaignCard";
 import Container from "../components/Container";
+import Loader from "../components/Loader";
 
 const CampaignPage = () => {
   const { data, isLoading } = useFetchCampaignList();
-  if (isLoading) return <h1>Loading.....</h1>;
+  if (isLoading) return <Loader />;
   const { data: campaignList, total } = data;
-  console.log(campaignList);
   return (
     <>
       <Banner

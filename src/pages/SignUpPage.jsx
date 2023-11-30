@@ -100,8 +100,6 @@ const SignUpPage = () => {
               photoURL: petImage,
             })
               .then(() => {
-                console.log("==========================");
-
                 axios
                   .post(`${serverApi}/users`, {
                     profilePic: petImage,
@@ -110,9 +108,10 @@ const SignUpPage = () => {
                   })
                   .then((res) => {
                     Swal.fire({
-                      title: "Success",
-                      text: "Signup successful",
                       icon: "success",
+                      title: "Signup successful",
+                      showConfirmButton: false,
+                      timer: 1500,
                     });
                     navigate("/");
                   })

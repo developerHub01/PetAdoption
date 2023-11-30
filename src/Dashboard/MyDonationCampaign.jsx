@@ -6,6 +6,7 @@ import CampaignTable from "./CampaignTable";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../customProvider/AuthProvider";
 import CampaignDonator from "./CampaignDonator";
+import Loader from "../components/Loader";
 
 const tableHeadingList = [
   "sn",
@@ -41,7 +42,7 @@ const MyDonationCampaign = () => {
       ).then((res) => res.json()),
     keepPreviousData: true,
   });
-  if (isLoading) return <h1>Loading..........</h1>;
+  if (isLoading) return <Loader />;
   if (isError) return <h1>{isError.message}</h1>;
   const campaignList = data?.data;
   const totalCampaign = data?.total;

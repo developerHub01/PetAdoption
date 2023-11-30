@@ -7,11 +7,12 @@ import axios from "axios";
 import { serverApi } from "../constant/constant";
 import Swal from "sweetalert2";
 import { HiMiniXMark } from "react-icons/hi2";
+import Loader from "./Loader";
 
 const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
   const { user } = useContext(AuthContext);
 
-  if (!user) return <h1>Loading........</h1>;
+  if (!user) return <Loader />;
 
   const { email, displayName: name } = user;
   const initialValues = {

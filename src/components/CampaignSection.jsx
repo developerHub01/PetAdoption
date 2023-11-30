@@ -2,7 +2,6 @@ import React from "react";
 import Container from "./Container";
 import Heading from "./Heading";
 import { Link } from "react-router-dom";
-import { handleTimeFormatFromUTC } from "../constant/constant";
 import CampaignRecommendation from "./CampaignRecommendation";
 const CampaignSection = () => {
   return (

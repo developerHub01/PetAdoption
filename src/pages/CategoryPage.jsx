@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Container from "../components/Container";
 import Banner from "../components/Banner";
 import PetCards from "../components/PetCards";
+import Loader from "../components/Loader";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -18,7 +19,7 @@ const CategoryPage = () => {
       ).then((res) => res.json()),
   });
 
-  if (isLoading) return <h1>Loading..........</h1>;
+  if (isLoading) return <Loader />;
 
   return (
     <div>

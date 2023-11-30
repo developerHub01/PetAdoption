@@ -8,6 +8,7 @@ import { FaBars } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import { AuthContext } from "../customProvider/AuthProvider";
+import Loader from "../components/Loader";
 
 const Sidebar = () => {
   const {
@@ -26,7 +27,7 @@ const Sidebar = () => {
 
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
-  if (isPetListLoading || isUserListLoading) return <h1>Loading.....</h1>;
+  if (isPetListLoading || isUserListLoading) return <Loader />;
 
   return (
     <div

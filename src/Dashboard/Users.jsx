@@ -5,6 +5,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "../components/Loader";
 
 const tableHeadingList = [
   "Product name",
@@ -28,7 +29,7 @@ const Users = () => {
   });
   const users = data?.data;
   const totalUser = data?.total;
-  if (isLoading) return <h1>Loading..........</h1>;
+  if (isLoading) return <Loader />;
   if (isError) return <h1>{isError.message}</h1>;
 
   const handleUnBlockStatus = async (email, blocked) => {

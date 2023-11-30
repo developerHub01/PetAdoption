@@ -3,11 +3,12 @@ import Container from "./Container";
 import useFetchCampaignList from "../useCustomHooks/useFetchCampaignList";
 import CampaignCard from "./CampaignCard";
 import InfiniteScrollCard from "./InfiniteScrollCard";
+import Loader from "./Loader";
 
 const CampaignRecommendation = () => {
   const { data, isLoading } = useFetchCampaignList(3);
 
-  if (isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <Loader />;
 
   const { data: campaignList, total } = data;
   return (

@@ -19,7 +19,6 @@ const RequestToMe = ({ data, refetch }) => {
       .get(`${serverApi}/adoptionReqestAccept/${_id}`)
       .then((res) => {
         res.data;
-        console.log(res.data);
         Swal.fire({
           title: "Success",
           text: "Accepted Successfully",

@@ -3,6 +3,8 @@ import CategorySection from "../components/CategorySection";
 import BannerSection from "../components/BannerSection";
 import CampaignSection from "../components/CampaignSection";
 import AboutSection from "../components/AboutSection";
+import GallerySection from "../components/GallerySection";
+import CTA from "../components/CTA";
 
 const Home = () => {
   return (
@@ -11,6 +13,8 @@ const Home = () => {
       <AboutSection />
       <CategorySection />
       <CampaignSection />
+      <GallerySection />
+      <CTA />
     </>
   );
 };
