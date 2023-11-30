@@ -19,7 +19,7 @@ const CampaignDonator = ({ setCampaignDonatorStatusOpen }) => {
             Donators are...
           </h2>
           <Scrollbar className={`w-full h-full overflow-auto`}>
-            <ul className="w-full h-full flex flex-col gap-2">
+            <ul className="w-full h-full flex flex-col gap-2 pr-2">
               <li className="w-full rounded-md hover:bg-white p-2 flex justify-between items-center gap-3">
                 <div className="flex justify-center items-center gap-2">
                   <div className="w-14 h-14 rounded-full overflow-hidden border-4 border-primaryColor">

@@ -68,7 +68,7 @@ const MyDonationCampaign = () => {
       );
   };
   return (
-    <div className="py-8">
+    <div className="py-8 flex flex-col gap-10">
       <CampaignTable
         totalCampaign={totalCampaign}
         campaignList={campaignList}
@@ -79,9 +79,17 @@ const MyDonationCampaign = () => {
         isPreviousData={isPreviousData}
         tableHeadingList={tableHeadingList}
       />
-      <CampaignDonator
-        setCampaignDonatorStatusOpen={setCampaignDonatorStatusOpen}
-      />
+      <button
+        className="px-6 py-2 text-xl bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
+        onClick={() => setCampaignDonatorStatusOpen((prev) => !prev)}
+      >
+        Donator List
+      </button>
+      {CampaignDonatorStatusOpen && (
+        <CampaignDonator
+          setCampaignDonatorStatusOpen={setCampaignDonatorStatusOpen}
+        />
+      )}
     </div>
   );
 };

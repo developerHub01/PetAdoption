@@ -32,11 +32,11 @@ const PetListTable = ({
           Pet List ({totalPet})
         </h1>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm rtl:text-right text-white text-center rounded-md overflow-hidden">
-            <thead className="text-xs text-white uppercase bg-primaryColor border-b-2 border-white">
+          <table className="w-full text-base font-normal rtl:text-right text-white text-center rounded-md overflow-hidden">
+            <thead className="text-xs text-white uppercase bg-primaryColor border-b-2 border-white select-none">
               <tr>
                 {tableHeadingList.map((item, key) => (
-                  <th key={key} className="px-6 py-3 whitespace-nowrap">
+                  <th key={key} className="px-6 py-5 whitespace-nowrap">
                     {item}
                   </th>
                 ))}
@@ -85,15 +85,9 @@ const PetListTable = ({
                       {petCategory}
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
-                      {petAdoptionStatus ? (
-                        <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto">
-                          Unadopted
-                        </button>
-                      ) : (
-                        <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto">
-                          Adopted
-                        </button>
-                      )}
+                      <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 mx-auto cursor-auto">
+                        {petAdoptionStatus ? "Unadopted" : "Adopted"}
+                      </button>
                     </td>
                     <td className="px-6 py-3 whitespace-nowrap capitalize">
                       <button

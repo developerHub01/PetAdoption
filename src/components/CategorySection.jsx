@@ -55,6 +55,7 @@ const CategorySection = () => {
         <Heading
           heading="Category"
           description="This is all of the category of pets we have"
+          theme="dark"
         />
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
           {categoryList.map(({ title, imgLink, path }) => (
@@ -74,7 +75,7 @@ const CategorySection = () => {
                   {title}
                 </h4>
                 <Link to={path}>
-                  <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-1 px-4 cursor-pointer">
+                  <button className="text-base bg-primaryColor rounded-full text-white grid place-items-center py-2 px-4 cursor-pointer">
                     View All
                   </button>
                 </Link>

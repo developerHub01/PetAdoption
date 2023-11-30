@@ -4,6 +4,7 @@ import { handleTimeFormatFromUTC } from "../constant/constant";
 import { GrUpdate } from "react-icons/gr";
 import { Link, useLocation } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { BiDollar } from "react-icons/bi";
 
 const CampaignTable = ({
   totalCampaign,
@@ -25,11 +26,11 @@ const CampaignTable = ({
         Campaign List ({totalCampaign})
       </h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm rtl:text-right text-white text-center rounded-md overflow-hidden">
-          <thead className="text-xs text-white uppercase bg-primaryColor border-b-2 border-white">
+        <table className="w-full rtl:text-right text-white text-center rounded-md overflow-hidden text-base font-normal">
+          <thead className="text-xs text-white uppercase bg-primaryColor border-b-2 border-white select-none">
             <tr>
               {tableHeadingList.map((item, key) => (
-                <th key={key} className="px-6 py-3 whitespace-nowrap">
+                <th key={key} className="px-6 py-5 whitespace-nowrap">
                   {item}
                 </th>
               ))}
@@ -84,10 +85,14 @@ const CampaignTable = ({
                   </td>
 
                   <td className="px-6 py-3 whitespace-nowrap capitalize">
-                    {donatedAmount}
+                    <span className="flex gap-2 justify-center items-center">
+                      {donatedAmount} <BiDollar />
+                    </span>
                   </td>
                   <td className="px-6 py-3 whitespace-nowrap capitalize">
-                    {maxDonationAmount}
+                    <span className="flex gap-2 justify-center items-center">
+                      {maxDonationAmount} <BiDollar />
+                    </span>
                   </td>
                   <td className="px-6 py-3 whitespace-nowrap capitalize">
                     <div className="flex flex-col gap-2 justify-center items-center">

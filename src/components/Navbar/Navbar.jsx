@@ -17,6 +17,11 @@ const menuList = [
     loggedOrNot: true,
   },
   {
+    path: "/campaign",
+    text: "Campaign Listing",
+    loggedOrNot: true,
+  },
+  {
     path: "/donations",
     text: "Donation Campaigns",
     loggedOrNot: true,
