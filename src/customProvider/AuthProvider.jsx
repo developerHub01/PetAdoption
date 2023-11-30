@@ -14,6 +14,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [userProfileImage, setUserProfileImage] = useState({});
   const [userLoading, setUserLoading] = useState(true);
 
   const signUpUser = (email, password) => {
@@ -38,9 +39,11 @@ const AuthProvider = ({ children }) => {
     const userStatus = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
-      setUser((prev) => currentUser);
+
       setUserLoading((prev) => false);
       if (currentUser) {
+        setUser((prev) => currentUser);
+        setUserProfileImage((prev) => currentUser?.photoURL);
         fetch(`${serverApi}/setJwt`, {
           method: "POST",
           mode: "cors",
@@ -57,6 +60,7 @@ const AuthProvider = ({ children }) => {
             console.log(error.message);
           });
       } else {
+        setUser((prev) => null);
         localStorage.removeItem("token");
       }
     });
@@ -66,6 +70,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
+    userProfileImage,
+    setUserProfileImage,
     userLoading,
     signUpUser,
     signInUser,

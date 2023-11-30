@@ -5,19 +5,19 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const socialIcons = [
   {
-    path: "/",
+    path: "https://www.facebook.com/",
     icon: <FaFacebookF />,
   },
   {
-    path: "/",
+    path: "https://www.instagram.com/",
     icon: <FaInstagram />,
   },
   {
-    path: "/",
+    path: "https://www.twitter.com/",
     icon: <FaTwitter />,
   },
   {
-    path: "/",
+    path: "https://www.youtube.com/",
     icon: <FaYoutube />,
   },
 ];
@@ -33,7 +33,7 @@ const Footer = () => {
           >
             PetAdopt
           </Link>
-          <div classNameName="w-full">
+          <div className="w-full">
             <p className="my-6 text-gray-200">
               Discover love at PetConnect. Our mission: fostering connections
               between pets and forever families. Explore our diverse community
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
           <ul className="flex flex-wrap gap-3 justify-center items-center mb-6 text-gray-900 dark:text-white">
             {socialIcons.map(({ path, icon }) => (
-              <li>
+              <li key={path}>
                 <Link to={path} className="text-xl">
                   {icon}
                 </Link>

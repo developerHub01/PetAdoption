@@ -57,7 +57,7 @@ const LoginPage = () => {
       <Container mxw="max-w-2xl">
         <div className="w-full h-full py-9 px-5 bg-white/5 shadow-xl backdrop-blur-lg rounded-md">
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-primaryColor capitalize pb-5 font-headingFont">
-            Signup
+            Login
           </h2>
           <div className="w-full max-w-md mx-auto flex flex-col gap-5 justify-center text-center">
             <Formik

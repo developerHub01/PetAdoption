@@ -31,7 +31,7 @@ const publicMenuList = [
 ];
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, userProfileImage } = useContext(AuthContext);
   const [menusStatus, setMenuStatus] = useState(false);
 
   const handleLogOut = () => {
@@ -76,6 +76,18 @@ const Navbar = () => {
           >
             <HiBars3BottomRight />
           </button>
+          {user && (
+            <button
+              onClick={() => setMenuStatus((prev) => !prev)}
+              className="w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-3xl rounded-full overflow-hidden"
+            >
+              <img
+                src={user.photoURL || userProfileImage}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </button>
+          )}
         </div>
       </div>
 
