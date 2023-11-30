@@ -1,30 +1,12 @@
 import React from "react";
 import Container from "../components/Container";
-import { backgroundImageDefaultStyle } from "../constant/constant";
+import { backgroundImageDefaultStyle, changeColorOpacity, options } from "../constant/constant";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Select from "react-select";
 import { primaryColor } from "../constant/constant";
 import { FaImage } from "react-icons/fa";
 const bgImg =
   "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-const options = [
-  { value: "dog", label: "Dog" },
-  { value: "cat", label: "Cat" },
-  { value: "rabbit", label: "Rabbit" },
-  { value: "hamster", label: "Hamster" },
-  { value: "fish", label: "Fish" },
-  { value: "hedgehog", label: "Hedgehog" },
-  { value: "bird", label: "Bird" },
-];
-
-//"rgba(63, 65, 26, 1)"
-const changeColorOpacity = (color, opacity) => {
-  color = color.split(",");
-  color[color.length - 1] = opacity + ")";
-  color = color.join(",");
-  return color;
-};
 
 const PetForm = ({
   initialValues,
@@ -44,7 +26,7 @@ const PetForm = ({
       }}
     >
       <Container mxw="max-w-2xl">
-        <div className="w-full h-full py-9 px-5 bg-white/5 shadow-xl backdrop-blur-lg">
+        <div className="w-full h-full py-9 px-5 bg-white/5 shadow-xl backdrop-blur-lg rounded-md">
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-primaryColor capitalize pb-5 font-headingFont">
             {prefix} Pet
           </h2>
@@ -62,7 +44,7 @@ const PetForm = ({
                     <Field
                       type="text"
                       name="petName"
-                      className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                      className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor rounded-md"
                       placeholder="Pet name"
                     />
                     <ErrorMessage name="petName" />
@@ -71,7 +53,7 @@ const PetForm = ({
                     <Field
                       type="number"
                       name="petAge"
-                      className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                      className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor rounded-md"
                       placeholder="age"
                     />
                     <ErrorMessage name="petAge" />
@@ -88,7 +70,7 @@ const PetForm = ({
                   options={options}
                   theme={(theme) => ({
                     ...theme,
-                    borderRadius: 0,
+                    borderRadius: "6px",
                     colors: {
                       ...theme.colors,
                       primary: primaryColor,
@@ -102,7 +84,7 @@ const PetForm = ({
                 />
                 <label
                   htmlFor="updatePetImage"
-                  className="w-full p-2 text-lg bg-primaryColor text-white flex justify-start items-center gap-2"
+                  className="w-full p-2 text-lg bg-primaryColor text-white flex justify-start items-center gap-2 rounded-md"
                 >
                   <FaImage /> Pet Image...
                 </label>
@@ -119,27 +101,27 @@ const PetForm = ({
                 <Field
                   type="text"
                   name="petLocation"
-                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor"
+                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor rounded-md"
                   placeholder="Pet location"
                 />
                 <ErrorMessage name="petLocation" />
                 <Field
                   as="textarea"
                   name="petShortDescription"
-                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[100px]"
+                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[100px] rounded-md"
                   placeholder="Short Description"
                 />
                 <ErrorMessage name="petShortDescription" />
                 <Field
                   as="textarea"
                   name="petLongDescription"
-                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[200px]"
+                  className="w-full p-2 outline-none text-primaryColor border-2 border-transparent focus:border-primaryColor selection:bg-primaryColor selection:text-secondaryColor resize-none min-h-[200px] rounded-md"
                   placeholder="Long Description"
                 />
                 <ErrorMessage name="petLongDescription" />
                 <button
                   type="submit"
-                  className={`self-center flex justify-center items-center gap-3 backdrop-blur-sm capitalize w-full px-4 py-3 bg-primaryColor outline-none text-white placeholder:text-white/80`}
+                  className={`self-center flex justify-center items-center gap-3 backdrop-blur-sm capitalize w-full px-4 py-3 bg-primaryColor outline-none text-white placeholder:text-white/80 rounded-md`}
                 >
                   {prefix} Pet
                   <span className="text-xl"></span>

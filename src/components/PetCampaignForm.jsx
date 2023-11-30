@@ -8,7 +8,7 @@ import { serverApi } from "../constant/constant";
 import Swal from "sweetalert2";
 import { HiMiniXMark } from "react-icons/hi2";
 
-const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
+const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
   const { user } = useContext(AuthContext);
 
   if (!user) return <h1>Loading........</h1>;
@@ -46,14 +46,14 @@ const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
     }
 
     axios
-      .post(`${serverApi}/adoption`, { ...values, petId })
+      .post(`${serverApi}/adoption`, { ...values, campaignId })
       .then((res) => {
         Swal.fire({
           title: "Success",
-          text: "Reqest Sent Successfully",
+          text: "Donated Successfully",
           icon: "success",
         });
-        setAdoptFormStateOpen((prev) => !prev);
+        setCampaignFormStateOpen((prev) => !prev);
       })
       .catch((error) => {
         Swal.fire({
@@ -61,20 +61,20 @@ const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
           title: "Oops...",
           text: error?.response?.data?.message || error.message,
         });
-        setAdoptFormStateOpen((prev) => !prev);
+        setCampaignFormStateOpen((prev) => !prev);
       });
   };
 
   return (
     <section className="fixed top-0 left-0 w-full h-full grid place-items-center bg-black/30 z-50">
       <Container mxw="max-w-2xl">
-        <div className="w-full h-full py-9 px-5 bg-white/10 shadow-xl backdrop-blur-xl relative">
+        <div className="w-full h-full py-9 px-5 bg-white/10 shadow-xl backdrop-blur-xl relative rounded-md">
           <HiMiniXMark
             className="absolute w-10 h-10 text-white grid place-items-center top-3 right-3 cursor-pointer"
-            onClick={() => setAdoptFormStateOpen((prev) => !prev)}
+            onClick={() => setCampaignFormStateOpen((prev) => !prev)}
           />
           <h2 className="text-center text-2xl sm:text-4xl font-bold text-primaryColor capitalize pb-5 font-headingFont">
-            Adopt Pet
+            Donate Campaign
           </h2>
           <div className="w-full max-w-2xl mx-auto flex flex-col gap-5 justify-center text-center">
             <Formik
@@ -122,7 +122,7 @@ const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
                   type="submit"
                   className={`self-center flex justify-center items-center gap-3 backdrop-blur-sm capitalize w-full px-4 py-3 bg-primaryColor outline-none text-white placeholder:text-white/80 rounded-md`}
                 >
-                  Adopt
+                  Donate
                   <span className="text-xl"></span>
                 </button>
               </Form>
@@ -134,4 +134,4 @@ const PetAdoptForm = ({ petId, setAdoptFormStateOpen }) => {
   );
 };
 
-export default PetAdoptForm;
+export default PetCampaignForm;

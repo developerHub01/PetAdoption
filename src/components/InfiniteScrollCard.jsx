@@ -28,7 +28,7 @@ const InfiniteScrollCard = ({ children }) => {
   return (
     <div
       ref={cardRef}
-      className="opacity-50 blur-2xl hover:scale-95 hover:shadow-2xl rounded-xl transition-all duration-150"
+      className="opacity-20 blur-2xl hover:scale-95 hover:shadow-2xl rounded-xl transition-all duration-200"
     >
       {children}
     </div>

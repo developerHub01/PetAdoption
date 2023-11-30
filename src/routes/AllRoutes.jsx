@@ -21,6 +21,7 @@ import MyDonationCampaign from "../Dashboard/MyDonationCampaign";
 import UpdateCampaign from "../Dashboard/UpdateCampaign";
 import CampaignDetailsPage from "../pages/CampaignDetailsPage";
 import CampaignPage from "../pages/CampaignPage";
+import AllCategoryPage from "../pages/AllCategoryPage";
 
 const routes = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const routes = createBrowserRouter([
       {
         path: "/petlist",
         element: <PetList />,
+      },
+      {
+        path: "/category",
+        element: <AllCategoryPage />,
       },
       {
         path: "/category/:category",

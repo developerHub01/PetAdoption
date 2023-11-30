@@ -12,7 +12,7 @@ const Heading = ({ heading, description, className, theme = "light" }) => {
       >
         {heading}
       </h2>
-      <p className={`${theme === "light" ? "text-gray-700" : "text-gray-200"}`}>
+      <p className={`text-base ${theme === "light" ? "text-gray-700" : "text-gray-200"}`}>
         {description}
       </p>
     </div>

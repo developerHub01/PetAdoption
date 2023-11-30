@@ -26,29 +26,29 @@ const PetDetails = ({
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex flex-col gap-2 justify-start items-start">
+            <div className="flex flex-col gap-4 justify-start items-start">
               <h2 className="text-primaryColor font-bold text-2xl">
                 {petName}
               </h2>
               <ul className="flex flex-col gap-3 text-gray-700">
-                <li>
+                <li className="capitalize flex gap-2">
                   <strong className="text-primaryColor">Age:</strong> {petAge}{" "}
                   years
                 </li>
-                <li className="capitalize">
+                <li className="capitalize flex gap-2">
                   <strong className="text-primaryColor">Category:</strong>{" "}
                   {petCategory}
                 </li>
-                <li>
-                  <strong className="text-primaryColor">Author Email:</strong>{" "}
+                <li className="flex gap-2">
+                  <strong className="text-primaryColor">Author Email:</strong>
                   {petAuthorEmail}
                 </li>
-                <li>
-                  <strong className="text-primaryColor">Location:</strong>{" "}
+                <li className="flex gap-2">
+                  <strong className="text-primaryColor">Location:</strong>
                   {petLocation}
                 </li>
-                <li>
-                  <strong className="text-primaryColor">Summary:</strong>{" "}
+                <li className="flex gap-2">
+                  <strong className="text-primaryColor">Summary:</strong>
                   {petShortDescription}
                 </li>
               </ul>

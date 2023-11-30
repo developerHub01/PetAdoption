@@ -1,37 +1,12 @@
 import React, { useContext, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import Container from "../components/Container";
 import { AuthContext } from "../customProvider/AuthProvider";
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
-import useFetchPets from "../useCustomHooks/useFetchPets";
-import Select from "react-select";
-import { FaImage } from "react-icons/fa";
-import { primaryColor, serverApi } from "../constant/constant";
-import useFetchPetById from "../useCustomHooks/useFetchPetById";
+import { options, serverApi } from "../constant/constant";
 import Swal from "sweetalert2";
 import axios from "axios";
 import PetForm from "./PetForm";
 const bgImg =
   "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-const options = [
-  { value: "dog", label: "Dog" },
-  { value: "cat", label: "Cat" },
-  { value: "rabbit", label: "Rabbit" },
-  { value: "hamster", label: "Hamster" },
-  { value: "fish", label: "Fish" },
-  { value: "hedgehog", label: "Hedgehog" },
-  { value: "bird", label: "Bird" },
-];
-
-//"rgba(63, 65, 26, 1)"
-const changeColorOpacity = (color, opacity) => {
-  color = color.split(",");
-  color[color.length - 1] = opacity + ")";
-  color = color.join(",");
-  return color;
-};
 
 const AddPet = () => {
   const {

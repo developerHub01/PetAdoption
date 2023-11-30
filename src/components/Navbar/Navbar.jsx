@@ -1,44 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
 import "./Navbar.css";
+import { AuthContext } from "../../customProvider/AuthProvider";
 
 const menuList = [
   {
     path: "/",
-    text: "Home",
-    loggedOrNot: true,
+    text: "home",
+    loggedOrNot: null,
+  },
+  {
+    path: "/category",
+    text: "Category",
+    loggedOrNot: null,
   },
   {
     path: "/petlist",
-    text: "Pet Listing",
-    loggedOrNot: true,
+    text: "pet listing",
+    loggedOrNot: null,
   },
   {
     path: "/campaign",
-    text: "Campaign Listing",
-    loggedOrNot: true,
+    text: "campaign listing",
+    loggedOrNot: null,
   },
   {
     path: "/donations",
-    text: "Donation Campaigns",
+    text: "donation campaigns",
     loggedOrNot: true,
   },
   {
     path: "/dashboard",
-    text: "Dashboard",
+    text: "dashboard",
     loggedOrNot: true,
   },
   {
     path: "/login",
-    text: "Login",
-    loggedOrNot: true,
+    text: "login",
+    loggedOrNot: false,
   },
 ];
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
   const [menusStatus, setMenuStatus] = useState(false);
   return (
     <div className="bg-primaryColor text-white">
@@ -88,7 +95,7 @@ const Navbar = () => {
             <li key={path} className="w-full">
               <NavLink
                 to={path}
-                className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full"
+                className="block transition-all duration-75 hover:bg-primaryColor hover:text-white rounded-md p-2 w-full capitalize"
               >
                 {text}
               </NavLink>
