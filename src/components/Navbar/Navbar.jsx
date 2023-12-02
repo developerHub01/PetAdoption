@@ -50,7 +50,7 @@ const Navbar = () => {
       <div className="w-[90%] mx-auto py-2 flex justify-between items-center">
         <Link
           to="/"
-          className="text-2xl select-none capitalize font-bold border-b-4 border-white pb-2"
+          className="text-lg md:text-2xl select-none capitalize font-bold border-b-4 border-white pb-2"
         >
           PetAdopt
         </Link>
@@ -59,10 +59,10 @@ const Navbar = () => {
           {user && (
             <Link
               to="/dashboard"
-              className="cart w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-2xl rounded-full relative"
+              className="cart w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-lg md:text-2xl rounded-full relative"
             >
               {/* TODO cart Number */}
-              <span className="cartNumber bg-red-600 text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
+              <span className="cartNumber bg-red-600 text-xs md:text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
                 5
               </span>
               <div>
@@ -72,14 +72,14 @@ const Navbar = () => {
           )}
           <button
             onClick={() => setMenuStatus((prev) => !prev)}
-            className="w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-3xl rounded-full"
+            className="w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-2xl md:text-3xl rounded-full"
           >
             <HiBars3BottomRight />
           </button>
           {user && (
             <button
               onClick={() => setMenuStatus((prev) => !prev)}
-              className="w-12 h-12 grid place-items-center bg-white/10 cursor-pointer text-3xl rounded-full overflow-hidden"
+              className="w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-3xl rounded-full overflow-hidden"
             >
               <img
                 src={user.photoURL || userProfileImage}

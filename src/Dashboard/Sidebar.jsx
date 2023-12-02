@@ -11,9 +11,8 @@ import { AuthContext } from "../customProvider/AuthProvider";
 import Loader from "../components/Loader";
 
 const Sidebar = () => {
-  const {
-    user: { email },
-  } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
   const {
     data: userList,
     isLoading: isUserListLoading,

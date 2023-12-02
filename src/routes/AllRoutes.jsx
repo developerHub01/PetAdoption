@@ -22,6 +22,7 @@ import UpdateCampaign from "../Dashboard/UpdateCampaign";
 import CampaignDetailsPage from "../pages/CampaignDetailsPage";
 import CampaignPage from "../pages/CampaignPage";
 import AllCategoryPage from "../pages/AllCategoryPage";
+import PrivateRoute from "../SecureRoutes/PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -68,7 +69,11 @@ const routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardMain />,
+    element: (
+      <PrivateRoute>
+        <DashboardMain />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "",
