@@ -37,7 +37,7 @@ const CampaignTable = ({
             </tr>
           </thead>
           <tbody>
-            {campaignList.map(
+            {campaignList?.map(
               (
                 {
                   _id,

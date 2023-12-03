@@ -5,6 +5,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import CampaignTable from "./CampaignTable";
 import Loader from "../components/Loader";
+import useAxiosAdmin from "../AxiosInstance/useAxiosAdmin";
+import { useNavigate } from "react-router-dom";
 
 const tableHeadingList = [
   "sn",
@@ -24,19 +26,21 @@ const tableHeadingList = [
 const AllCampaign = () => {
   const numberOfUser = 8;
   const [page, setPage] = useState(0);
+  const adminAxios = useAxiosAdmin(localStorage.getItem("token"));
+  const navigate = useNavigate();
   const { data, isLoading, isError, refetch, isPreviousData } = useQuery({
     queryKey: ["campaign", page],
     queryFn: () =>
-      fetch(
-        `${serverApi}/campaign?numberOfUser=${numberOfUser}&page=${page}`
-      ).then((res) => res.json()),
+      adminAxios
+        .get(`/campaignAdmin?numberOfUser=${numberOfUser}&page=${page}`)
+        .then((res) => res.data)
+        .catch((error) => navigate("/unauthorizeToken", { replace: true })),
     keepPreviousData: true,
   });
   if (isLoading) return <Loader />;
-  if (isError) return <h1>{isError.message}</h1>;
+  if (isError) console.log(isError.message);
   const campaignList = data?.data;
   const totalCampaign = data?.total;
-  console.log(totalCampaign);
 
   const handleDeleteCampaign = (_id) => {
     Swal.fire({

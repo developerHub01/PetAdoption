@@ -10,12 +10,14 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import useAxiosPublic from "../AxiosInstance/useAxiosPublic";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [userProfileImage, setUserProfileImage] = useState({});
   const [userLoading, setUserLoading] = useState(true);
+  const publicAxios = useAxiosPublic();
 
   const signUpUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -44,21 +46,9 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser((prev) => currentUser);
         setUserProfileImage((prev) => currentUser?.photoURL);
-        fetch(`${serverApi}/setJwt`, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            localStorage.setItem("token", data.token);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        publicAxios
+          .post("/setJwt", loggedUser)
+          .then((res) => localStorage.setItem("token", res.data.token));
       } else {
         setUser((prev) => null);
         localStorage.removeItem("token");

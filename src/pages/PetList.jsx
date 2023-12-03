@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import PetCards from "../components/PetCards";
 import Loader from "../components/Loader";
+import useAxiosPublic from "../AxiosInstance/useAxiosPublic";
 
 const petBannerImg =
   "https://images.unsplash.com/photo-1496284427489-f59461d8a8e6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -21,17 +22,15 @@ const PetList = () => {
   const petListOptions = [{ value: "", label: "All" }, ...options];
   const [categoryName, setCategoryName] = useState(petListOptions[0]);
   const [filteredData, setFilteredData] = useState([]);
-
+  const publicAxios = useAxiosPublic();
   const { data, isLoading } = useQuery({
     queryKey: ["pets"],
     queryFn: () =>
-      fetch(`${serverApi}/pet`)
-        .then((res) => res.json())
-        .then((data) => {
-          const responseData = data.data;
-          setFilteredData((prev) => responseData);
-          return responseData;
-        }),
+      publicAxios.get("/pet").then((res) => {
+        const responseData = res.data.data;
+        setFilteredData((prev) => responseData);
+        return responseData;
+      }),
   });
 
   if (isLoading) return <Loader />;
@@ -97,7 +96,7 @@ const PetList = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {filteredData.map((item) => (
+            {filteredData?.map((item) => (
               <PetCards key={item._id} {...item} />
             ))}
           </div>

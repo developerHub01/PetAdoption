@@ -1,38 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import Container from "../components/Container";
 import { serverApi } from "../constant/constant";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
-import { GrUpdate } from "react-icons/gr";
-import { Link } from "react-router-dom";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import Swal from "sweetalert2";
 import PetListTable from "./PetListTable";
 import Loader from "../components/Loader";
-
-const tableHeadingList = [
-  "pet Image",
-  "Author Email",
-  "pet Name",
-  "pet Age",
-  "pet Category",
-  "pet Status",
-  "Adoption Action",
-  "Remove",
-  "Update",
-];
+import { useNavigate } from "react-router-dom";
+import useAxiosAdmin from "../AxiosInstance/useAxiosAdmin";
 
 const AllPets = () => {
   const numberOfUser = 8;
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
   const { refetch: refetchAllPets } = useFetchPets();
+  const adminAxios = useAxiosAdmin(localStorage.getItem("token"));
   const { data, isLoading, isError, refetch, isPreviousData } = useQuery({
     queryKey: ["pets", page],
     queryFn: () =>
-      fetch(`${serverApi}/pet?numberOfUser=${numberOfUser}&page=${page}`).then(
-        (res) => res.json()
-      ),
+      adminAxios
+        .get(`/pet?numberOfUser=${numberOfUser}&page=${page}`)
+        .then((res) => res.data)
+        .catch((error) => {
+          navigate("/unauthorizeToken", { replace: true });
+        }),
     keepPreviousData: true,
   });
   const pets = data?.data;
@@ -41,10 +32,9 @@ const AllPets = () => {
   if (isError) return <h1>{isError.message}</h1>;
 
   const handleChangePetAdoptionStatus = (_id) => {
-    axios
-      .patch(`${serverApi}/pet/adoptionStatusByAdmin/${_id}`)
+    adminAxios
+      .patch(`/pet/adoptionStatusByAdmin/${_id}`)
       .then((res) => {
-        console.log(res.data);
         refetch();
         Swal.fire({
           title: "Deleted!",
@@ -71,8 +61,8 @@ const AllPets = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${serverApi}/pet/deleteAdmin/${_id}`)
+        adminAxios
+          .delete(`/pet/deleteAdmin/${_id}`)
           .then((res) => {
             console.log(res.data);
             refetch();

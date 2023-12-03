@@ -23,6 +23,8 @@ import CampaignDetailsPage from "../pages/CampaignDetailsPage";
 import CampaignPage from "../pages/CampaignPage";
 import AllCategoryPage from "../pages/AllCategoryPage";
 import PrivateRoute from "../SecureRoutes/PrivateRoute";
+import AdminRoute from "../SecureRoutes/AdminRoute";
+import UnauthorizeToken from "../pages/UnauthorizeToken";
 
 const routes = createBrowserRouter([
   {
@@ -77,49 +79,97 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <DashboardHome />,
+        element: (
+          <PrivateRoute>
+            <DashboardHome />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <AdminRoute>
+            <Users />
+          </AdminRoute>
+        ),
       },
       {
         path: "addpet",
-        element: <AddPet />,
+        element: (
+          <PrivateRoute>
+            <AddPet />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "allpets",
-        element: <AllPets />,
+        element: (
+          <AdminRoute>
+            <AllPets />
+          </AdminRoute>
+        ),
       },
       {
         path: "myaddedpets",
-        element: <MyAddedPets />,
+        element: (
+          <PrivateRoute>
+            <MyAddedPets />
+          </PrivateRoute>
+        ),
       },
       {
         path: "pet/update/:_id",
-        element: <UpdatePet />,
+        element: (
+          <PrivateRoute>
+            <UpdatePet />
+          </PrivateRoute>
+        ),
       },
       {
         path: "campaign/update/:_id",
-        element: <UpdateCampaign />,
+        element: (
+          <PrivateRoute>
+            <UpdateCampaign />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myadoptionrequest",
-        element: <MyAdoptionRequest />,
+        element: (
+          <PrivateRoute>
+            <MyAdoptionRequest />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addcampaign",
-        element: <AddCampaign />,
+        element: (
+          <PrivateRoute>
+            <AddCampaign />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allcampaign",
-        element: <AllCampaign />,
+        element: (
+          <AdminRoute>
+            <AllCampaign />
+          </AdminRoute>
+        ),
       },
       {
         path: "mycampaign",
-        element: <MyDonationCampaign />,
+        element: (
+          <PrivateRoute>
+            <MyDonationCampaign />
+          </PrivateRoute>
+        ),
       },
     ],
+  },
+  {
+    path: "/unauthorizeToken",
+    element: <UnauthorizeToken />,
   },
 ]);
 

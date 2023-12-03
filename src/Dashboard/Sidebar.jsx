@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";
 import "./dashboard.css";
 import useFetchUsers from "../useCustomHooks/useFetchUsers";
@@ -9,10 +9,11 @@ import { FaXmark } from "react-icons/fa6";
 import useFetchPets from "../useCustomHooks/useFetchPets";
 import { AuthContext } from "../customProvider/AuthProvider";
 import Loader from "../components/Loader";
+import useAxiosAdmin from "../AxiosInstance/useAxiosAdmin";
+import { useQuery } from "@tanstack/react-query";
 
 const Sidebar = () => {
   const { user } = useContext(AuthContext);
-  const email = user?.email;
   const {
     data: userList,
     isLoading: isUserListLoading,
@@ -24,9 +25,19 @@ const Sidebar = () => {
     isError: isPetListError,
   } = useFetchPets();
 
+  const axiosAdmin = useAxiosAdmin(localStorage.getItem("token"));
+  const { isLoading: adminLoading, data: adminStatus } = useQuery({
+    queryKey: [],
+    queryFn: () =>
+      axiosAdmin.get("/adminCheck").then((res) => {
+        return { statusCode: res.status, data: res.data };
+      }),
+  });
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
-  if (isPetListLoading || isUserListLoading) return <Loader />;
+  if (!user) return <Navigate to="/login" replace={true} />;
+
+  if (isPetListLoading || isUserListLoading || adminLoading) return <Loader />;
 
   return (
     <div
@@ -60,28 +71,45 @@ const Sidebar = () => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="users"
-                className="w-full py-1 px-3 bg-primaryColor rounded-md flex gap-2"
-              >
-                Users
-                <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
-                  {userList.total}
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="allpets"
-                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
-              >
-                All Pets
-                <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
-                  {petList.total}
-                </span>
-              </NavLink>
-            </li>
+            {adminStatus?.statusCode === 202 && (
+              <>
+                <li>
+                  <NavLink
+                    to="users"
+                    className="w-full py-1 px-3 bg-primaryColor rounded-md flex gap-2"
+                  >
+                    Users
+                    {userList.total && (
+                      <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
+                        {userList.total}
+                      </span>
+                    )}
+                  </NavLink>
+                </li>{" "}
+                <li>
+                  <NavLink
+                    to="allpets"
+                    className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+                  >
+                    All Pets
+                    {petList.total && (
+                      <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
+                        {petList.total}
+                      </span>
+                    )}
+                  </NavLink>
+                </li>{" "}
+                <li>
+                  <NavLink
+                    to="allcampaign"
+                    className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+                  >
+                    All Campaign
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             <li>
               <NavLink
                 to="addpet"
@@ -90,14 +118,7 @@ const Sidebar = () => {
                 Add a pet
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="allcampaign"
-                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
-              >
-                All Campaign
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 to="mycampaign"

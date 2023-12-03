@@ -6,25 +6,32 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loader from "../components/Loader";
+import useAxiosAdmin from "../AxiosInstance/useAxiosAdmin";
+import { useNavigate } from "react-router-dom";
 
 const tableHeadingList = [
   "Product name",
   "email",
   "profile picture",
   "Role",
-  "Action",
+  "Make Admin",
   "Ban",
 ];
 
 const Users = () => {
   const numberOfUser = 8;
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
+  const adminAxios = useAxiosAdmin(localStorage.getItem("token"));
   const { data, isLoading, isError, refetch, isPreviousData } = useQuery({
     queryKey: ["users", page],
     queryFn: () =>
-      fetch(
-        `${serverApi}/users?numberOfUser=${numberOfUser}&page=${page}`
-      ).then((res) => res.json()),
+      adminAxios
+        .get(`/users?numberOfUser=${numberOfUser}&page=${page}`)
+        .then((res) => res.data)
+        .catch((error) => {
+          navigate("/unauthorizeToken", { replace: true });
+        }),
     keepPreviousData: true,
   });
   const users = data?.data;
@@ -33,8 +40,8 @@ const Users = () => {
   if (isError) return <h1>{isError.message}</h1>;
 
   const handleUnBlockStatus = async (email, blocked) => {
-    axios
-      .get(`${serverApi}/users/banStatus/${email}`)
+    adminAxios
+      .get(`/users/banStatus/${email}`)
       .then((res) => {
         res.data;
         refetch();
@@ -64,8 +71,8 @@ const Users = () => {
       confirmButtonText: "Yes, Make him admin!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .get(`${serverApi}/users/makeAdmin/${email}`)
+        adminAxios
+          .get(`/users/makeAdmin/${email}`)
           .then((res) => {
             res.data;
             refetch();
@@ -99,7 +106,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map(
+              {users?.map(
                 ({ _id, profilePic, fullName, email, role, blocked }) => (
                   <tr
                     key={_id}
