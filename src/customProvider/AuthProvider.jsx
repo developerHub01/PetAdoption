@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/config";
-import { serverApi } from "../constant/constant";
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,

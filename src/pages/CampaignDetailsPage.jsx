@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Banner";
 import PetDetails from "../components/PetDetails";
@@ -16,7 +16,6 @@ const CampaignDetailsPage = () => {
   const { data, isLoading } = useFetchCampaignById(_id);
 
   const [campaignFormStateOpen, setCampaignFormStateOpen] = useState(false);
-
   if (isLoading) return <Loader />;
 
   const { petImage, petName } = data;

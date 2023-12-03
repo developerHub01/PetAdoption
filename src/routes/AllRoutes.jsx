@@ -25,6 +25,9 @@ import AllCategoryPage from "../pages/AllCategoryPage";
 import PrivateRoute from "../SecureRoutes/PrivateRoute";
 import AdminRoute from "../SecureRoutes/AdminRoute";
 import UnauthorizeToken from "../pages/UnauthorizeToken";
+import Payment from "../Dashboard/Payment/Payment";
+import MyDonations from "../Dashboard/MyDonations";
+import CheckOutPage from "../Dashboard/CheckOutPage";
 
 const routes = createBrowserRouter([
   {
@@ -162,6 +165,22 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyDonationCampaign />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "mydonations",
+        element: (
+          <PrivateRoute>
+            <MyDonations />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute>
+            <CheckOutPage />
           </PrivateRoute>
         ),
       },

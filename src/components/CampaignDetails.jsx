@@ -55,10 +55,28 @@ const CampaignDetails = ({
                 </li>
                 <li className="flex gap-2 capitalize flex-wrap">
                   <strong className="text-primaryColor">
-                    Donation Amoutn:
+                    Donation Amount:
                   </strong>
                   <span className="flex gap-1 justify-center items-center">
                     {donatedAmount}
+                    <BiDollar className="text-lg" />
+                  </span>
+                </li>
+                <li className="flex gap-2 capitalize flex-wrap">
+                  <strong className="text-primaryColor">
+                    Max donation Amount:
+                  </strong>
+                  <span className="flex gap-1 justify-center items-center">
+                    {maxDonationAmount}
+                    <BiDollar className="text-lg" />
+                  </span>
+                </li>
+                <li className="flex gap-2 capitalize flex-wrap">
+                  <strong className="text-primaryColor">
+                    More donation Need:
+                  </strong>
+                  <span className="flex gap-1 justify-center items-center">
+                    {maxDonationAmount - donatedAmount}
                     <BiDollar className="text-lg" />
                   </span>
                 </li>

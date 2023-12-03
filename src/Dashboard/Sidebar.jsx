@@ -62,7 +62,7 @@ const Sidebar = () => {
       </Link>
       <div className="w-full h-full overflow-hidden bg-white/5 p-1 rounded-md">
         <Scrollbar className={`w-full h-full overflow-auto`}>
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col gap-1 capitalize">
             <li>
               <NavLink
                 to="/dashboard"
@@ -145,7 +145,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="mydonations"
                 className="w-full py-1 px-3 bg-primaryColor block rounded-md"
               >
                 My Donations
@@ -157,6 +157,14 @@ const Sidebar = () => {
                 className="w-full py-1 px-3 bg-primaryColor block rounded-md"
               >
                 Add Campaign
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="payment"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                Check out form
               </NavLink>
             </li>
           </ul>

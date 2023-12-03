@@ -6,33 +6,41 @@ import { HiMiniXMark } from "react-icons/hi2";
 import "./Navbar.css";
 import { AuthContext } from "../../customProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useFetchCartList from "../../useCustomHooks/useFetchCartList";
+import CartList from "./CartList";
+import Loader from "../Loader";
 
 const publicMenuList = [
   {
     path: "/",
     text: "home",
-    loggedOrNot: null,
   },
   {
     path: "/category",
     text: "Category",
-    loggedOrNot: null,
   },
   {
     path: "/petlist",
     text: "pet list",
-    loggedOrNot: null,
   },
   {
     path: "/campaign",
     text: "campaign list",
-    loggedOrNot: null,
   },
 ];
 
 const Navbar = () => {
   const { user, signOutUser, userProfileImage } = useContext(AuthContext);
   const [menusStatus, setMenuStatus] = useState(false);
+  const [cartPopUpStatus, setCartPopUpStatus] = useState(false);
+
+  if (!user) return <Loader />;
+
+  const { data, isLoading } = useFetchCartList(user?.email);
+
+  if (isLoading) return <Loader />;
+
+  console.log(data);
 
   const handleLogOut = () => {
     signOutUser();
@@ -57,18 +65,20 @@ const Navbar = () => {
 
         <div className="flex justify-center items-center gap-4">
           {user && (
-            <Link
-              to="/dashboard"
-              className="cart w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-lg md:text-2xl rounded-full relative"
-            >
-              {/* TODO cart Number */}
-              <span className="cartNumber bg-red-600 text-xs md:text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
-                5
-              </span>
-              <div>
-                <FaCartShopping />
-              </div>
-            </Link>
+            <div className="relative">
+              <button
+                className="cart w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-lg md:text-2xl rounded-full relative"
+                onClick={() => setCartPopUpStatus((prev) => !prev)}
+              >
+                <span className="cartNumber bg-red-600 text-xs md:text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
+                  {data?.length}
+                </span>
+                <div>
+                  <FaCartShopping />
+                </div>
+              </button>
+              {cartPopUpStatus && <CartList />}
+            </div>
           )}
           <button
             onClick={() => setMenuStatus((prev) => !prev)}
@@ -90,7 +100,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-
       <div
         className={`sidebarPublic shadow-2xl w-64 h-screen overflow-hidden bg-white fixed top-0 right-0 z-40 transition-all duration-100 grid place-items-center p-5 ${
           menusStatus ? "translate-x-0" : "translate-x-full"
