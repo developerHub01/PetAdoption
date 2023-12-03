@@ -9,17 +9,28 @@ import Swal from "sweetalert2";
 import useAxiosPrivate from "../AxiosInstance/useAxiosPrivate";
 import Payment from "./Payment/Payment";
 import useTotalCost from "../useCustomHooks/useTotalCost";
+import { useQuery } from "@tanstack/react-query";
 const tableHeadingList = ["Pet Name", "Pet Image", "Donation amount", "Remove"];
 const CheckOutPage = () => {
   const { user } = useContext(AuthContext);
-  if (!user) return <Loader />;
   const { data, isLoading, refetch } = useFetchCartList(user?.email);
-  if (isLoading) return <Loader />;
 
   const privateAxios = useAxiosPrivate();
 
-  const totalCost = useTotalCost(user?.email);
-  console.log(totalCost);
+  // if(isLoading) return <Loader />
+
+  const {
+    data: totalCost,
+    isLoading: costLoading,
+    refetch: refetchTotalCost,
+  } = useQuery({
+    queryKey: ["totalCost", user?.email],
+    queryFn: () =>
+      privateAxios.get(`/donate/${user?.email}`).then((res) => {
+        return res.data.reduce((acc, curr) => acc + curr.donatonAmount, 0);
+      }),
+  });
+  if (costLoading) return <Loader />;
 
   const handleRemoveCart = (_id) => {
     privateAxios
@@ -27,6 +38,7 @@ const CheckOutPage = () => {
       .then((res) => {
         res.data;
         refetch();
+        refetchTotalCost();
       })
       .catch((error) =>
         Swal.fire({
@@ -40,9 +52,6 @@ const CheckOutPage = () => {
     <div className="py-8">
       <Container>
         <div className="w-full flex flex-col gap-5">
-          <h1 className="text-2xl text-center font-bold text-primaryColor">
-            Cart List
-          </h1>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-base rtl:text-right text-white text-center rounded-md overflow-hidden">
               <thead className="text-xs text-white uppercase bg-primaryColor border-b-2 border-white select-none">
@@ -97,6 +106,9 @@ const CheckOutPage = () => {
               </tbody>
             </table>
           </div>
+          <h1 className="text-2xl text-center font-bold text-primaryColor">
+            Total Cost = {totalCost}$
+          </h1>
         </div>
         <Payment />
       </Container>

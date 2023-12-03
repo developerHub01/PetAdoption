@@ -39,6 +39,7 @@ const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
             text: res.data.error,
           });
         }
+
         refetch();
         Swal.fire({
           title: "Success",
