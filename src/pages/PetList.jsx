@@ -26,7 +26,7 @@ const PetList = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["pets"],
     queryFn: () =>
-      publicAxios.get("/pet").then((res) => {
+      publicAxios.get(`/pet?petAdoptionStatus=${true}`).then((res) => {
         const responseData = res.data.data;
         setFilteredData((prev) => responseData);
         return responseData;

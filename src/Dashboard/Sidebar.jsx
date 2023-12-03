@@ -62,7 +62,7 @@ const Sidebar = () => {
       </Link>
       <div className="w-full h-full overflow-hidden bg-white/5 p-1 rounded-md">
         <Scrollbar className={`w-full h-full overflow-auto`}>
-          <ul className="flex flex-col gap-1 capitalize">
+          <ul className="flex flex-col gap-2 capitalize">
             <li>
               <NavLink
                 to="/dashboard"
@@ -98,7 +98,7 @@ const Sidebar = () => {
                       </span>
                     )}
                   </NavLink>
-                </li>{" "}
+                </li>
                 <li>
                   <NavLink
                     to="allcampaign"
