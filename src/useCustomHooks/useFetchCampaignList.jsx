@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { serverApi } from "../constant/constant";
+import useAxiosPublic from "../AxiosInstance/useAxiosPublic";
 
 const useFetchCampaignList = (numberOfUser) => {
-  let searchQuery = `${serverApi}/campaign?donationStatusActive=${true}`;
+  let searchQuery = `/campaign?donationStatusActive=${true}`;
   if (numberOfUser) searchQuery += `&numberOfUser=${numberOfUser}`;
+  const publicAxios = useAxiosPublic();
   const response = useQuery({
     queryKey: ["pets", numberOfUser],
-    queryFn: () => fetch(searchQuery).then((res) => res.json()),
+    queryFn: () =>
+      publicAxios.get(searchQuery).then((res) => {
+        return res.data;
+      }),
   });
   return response;
 };

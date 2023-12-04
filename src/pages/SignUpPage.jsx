@@ -40,8 +40,7 @@ const bgImg =
   "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 const SignUpPage = () => {
-  const { signUpUser, setUser, setUserProfileImage } =
-    useContext(AuthContext);
+  const { signUpUser, setUser, setUserProfileImage } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const imageRef = useRef(null);
@@ -62,7 +61,6 @@ const SignUpPage = () => {
 
   const handleSignUp = (values) => {
     const { fullName, email, password } = values;
-    console.log(values);
 
     if (!usePasswordVarification(password)) {
       return Swal.fire({

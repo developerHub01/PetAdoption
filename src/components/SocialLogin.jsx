@@ -7,21 +7,21 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
-  const { googleSignIn, facebookSignIn, setUser } = useContext(AuthContext);
+  const { googleSignIn, facebookSignIn, setUser, setUserProfileImage } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSaveSignInDataInDB = (user) => {
-    const { photoURL: profilePic, email, displayName: fullName } = user;
-
+    if (!user) return;
     fetch(`${serverApi}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        profilePic,
-        email,
-        fullName,
+        profilePic: user?.photoURL,
+        email: user.email,
+        fullName: user.displayName,
       }),
     })
       .then((res) => res.json())
@@ -32,6 +32,8 @@ const SocialLogin = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        setUserProfileImage((prev) => user?.photoURL);
+        setUser((prev) => user);
         navigate("/");
       })
       .catch((error) =>

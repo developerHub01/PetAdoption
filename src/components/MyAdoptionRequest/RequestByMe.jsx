@@ -69,7 +69,7 @@ const RequestByMe = ({ data, refetch }) => {
               i
             ) => (
               <tr
-                key={_id}
+                key={key}
                 className="bg-white text-primaryColor hover:bg-primaryColor/5 border-primaryColor/20 border-b"
               >
                 <td className="px-6 py-3 whitespace-nowrap capitalize">
@@ -102,7 +102,7 @@ const RequestByMe = ({ data, refetch }) => {
                 <td className="px-6 py-3 whitespace-nowrap capitalize">
                   <button
                     className="px-5 py-1 text-lg bg-primaryColor rounded-full text-white grid place-items-center mx-auto"
-                    onClick={() => handleRemove(_id)}
+                    onClick={() => handleRemove(key)}
                   >
                     Remove
                   </button>

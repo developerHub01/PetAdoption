@@ -33,9 +33,6 @@ const Navbar = () => {
   const { user, signOutUser, userProfileImage } = useContext(AuthContext);
   const [menusStatus, setMenuStatus] = useState(false);
   const [cartPopUpStatus, setCartPopUpStatus] = useState(false);
-
-  if (!user) return <Loader />;
-
   const { data, isLoading } = useFetchCartList(user?.email);
 
   if (isLoading) return <Loader />;

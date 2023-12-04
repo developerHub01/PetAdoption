@@ -10,6 +10,7 @@ import Container from "../components/Container";
 import Heading from "../components/Heading";
 import PetCampaignForm from "../components/PetCampaignForm";
 import Loader from "../components/Loader";
+import CampaignRecommendationWithOutASpecificId from "../components/CampaignRecommendationWithOutASpecificId";
 
 const CampaignDetailsPage = () => {
   const { _id } = useParams();
@@ -32,7 +33,7 @@ const CampaignDetailsPage = () => {
             heading="Recommended Campaigns"
             description="Recommended campaigns that started recently"
           />
-          <CampaignRecommendation />
+          <CampaignRecommendationWithOutASpecificId _id={_id} />
         </Container>
       </div>
       {campaignFormStateOpen && (

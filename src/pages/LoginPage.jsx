@@ -8,6 +8,7 @@ import SocialLogin from "../components/SocialLogin";
 import React, { useContext, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../AxiosInstance/useAxiosPublic";
 
 const bgImg =
   "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -16,7 +17,7 @@ const LoginPage = () => {
   const { data } = useContext(AuthContext);
   console.log("data ==> " + data);
   const { setUser, signInUser } = useContext(AuthContext);
-
+  const publicAxios = useAxiosPublic();
   const navigate = useNavigate();
 
   const initialValues = {

@@ -40,7 +40,6 @@ const AuthProvider = ({ children }) => {
     const userStatus = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
-
       setUserLoading((prev) => false);
       if (currentUser) {
         setUser((prev) => currentUser);

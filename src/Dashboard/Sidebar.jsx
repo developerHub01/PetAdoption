@@ -13,7 +13,8 @@ import useAxiosAdmin from "../AxiosInstance/useAxiosAdmin";
 import { useQuery } from "@tanstack/react-query";
 
 const Sidebar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, userLoading } = useContext(AuthContext);
+  const [userStatus, setUserStatus] = useState(false);
   const {
     data: userList,
     isLoading: isUserListLoading,
@@ -24,20 +25,16 @@ const Sidebar = () => {
     isLoading: isPetListLoading,
     isError: isPetListError,
   } = useFetchPets();
-
-  const axiosAdmin = useAxiosAdmin(localStorage.getItem("token"));
-  const { isLoading: adminLoading, data: adminStatus } = useQuery({
-    queryKey: [],
-    queryFn: () =>
-      axiosAdmin.get("/adminCheck").then((res) => {
-        return { statusCode: res.status, data: res.data };
-      }),
-  });
+  // const axiosAdmin = useAxiosAdmin(localStorage.getItem("token"));
+  // const { isLoading: adminLoading, data: adminStatus } = useQuery({
+  //   queryKey: ["userStatus"],
+  //   queryFn: () => axiosAdmin.get(`/adminCheck`).then((res) => res.data),
+  // });
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   if (!user) return <Navigate to="/login" replace={true} />;
 
-  if (isPetListLoading || isUserListLoading || adminLoading) return <Loader />;
+  if (isPetListLoading || isUserListLoading) return <Loader />;
 
   return (
     <div
@@ -71,45 +68,40 @@ const Sidebar = () => {
                 Home
               </NavLink>
             </li>
-            {adminStatus?.statusCode === 202 && (
-              <>
-                <li>
-                  <NavLink
-                    to="users"
-                    className="w-full py-1 px-3 bg-primaryColor rounded-md flex gap-2"
-                  >
-                    Users
-                    {userList.total && (
-                      <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
-                        {userList.total}
-                      </span>
-                    )}
-                  </NavLink>
-                </li>{" "}
-                <li>
-                  <NavLink
-                    to="allpets"
-                    className="w-full py-1 px-3 bg-primaryColor block rounded-md"
-                  >
-                    All Pets
-                    {petList.total && (
-                      <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
-                        {petList.total}
-                      </span>
-                    )}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="allcampaign"
-                    className="w-full py-1 px-3 bg-primaryColor block rounded-md"
-                  >
-                    All Campaign
-                  </NavLink>
-                </li>
-              </>
-            )}
-
+            <li>
+              <NavLink
+                to="users"
+                className="w-full py-1 px-3 bg-primaryColor rounded-md flex gap-2"
+              >
+                Users
+                {userList.total && (
+                  <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
+                    {userList.total}
+                  </span>
+                )}
+              </NavLink>
+            </li>{" "}
+            <li>
+              <NavLink
+                to="allpets"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                All Pets
+                {petList.total && (
+                  <span className="bg-red-600 text-white rounded-full text-sm py-[2px] px-1">
+                    {petList.total}
+                  </span>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="allcampaign"
+                className="w-full py-1 px-3 bg-primaryColor block rounded-md"
+              >
+                All Campaign
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="addpet"
@@ -118,7 +110,6 @@ const Sidebar = () => {
                 Add a pet
               </NavLink>
             </li>
-
             <li>
               <NavLink
                 to="mycampaign"

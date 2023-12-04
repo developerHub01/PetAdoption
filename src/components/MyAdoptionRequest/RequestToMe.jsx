@@ -95,7 +95,7 @@ const RequestToMe = ({ data, refetch }) => {
                         ? "bg-gray-600 pointer-events-none"
                         : "bg-primaryColor pointer-events-auto"
                     } rounded-full text-white grid place-items-center mx-auto`}
-                    onClick={() => handleAccept(_id)}
+                    onClick={() => handleAccept(key)}
                   >
                     {requestAcceptStatus ? "Accepted" : "Accept"}
                   </button>
