@@ -82,7 +82,7 @@ const CheckoutForm = () => {
         await Promise.all(promises);
         Swal.fire({
           title: "Success",
-          text: "Updated Successfully",
+          text: "Donated Successfully",
           icon: "success",
         });
         refetchTotalCost();
