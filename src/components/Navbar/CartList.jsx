@@ -33,7 +33,7 @@ const CartList = () => {
   return (
     <div className="absolute top-0 right-0 translate-y-[50px] flex flex-col gap-2 w-72 h-[90vh] max-h-[500px] p-2 bg-white shadow-xl overflow-hidden rounded-md cursor-auto">
       <h2 className="text-2xl text-primaryColor text-center font-bold">
-        Cart List (50)
+        Cart List ({data?.length})
       </h2>
       <Scrollbar className="w-full h-full overflow-hidden">
         <ul className="w-full p-2 overflow-hidden flex flex-col gap-2 flex-grow-0 flex-shrink-0">
