@@ -28,11 +28,13 @@ import UnauthorizeToken from "../pages/UnauthorizeToken";
 import Payment from "../Dashboard/Payment/Payment";
 import MyDonations from "../Dashboard/MyDonations";
 import CheckOutPage from "../Dashboard/CheckOutPage";
+import ErrorPage from "../pages/ErrorPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

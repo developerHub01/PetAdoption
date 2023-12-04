@@ -70,9 +70,11 @@ const Navbar = () => {
                 className="cart w-10 md:w-12 h-10 md:h-12 grid place-items-center bg-white/10 cursor-pointer text-lg md:text-2xl rounded-full relative"
                 onClick={() => setCartPopUpStatus((prev) => !prev)}
               >
-                <span className="cartNumber bg-red-600 text-xs md:text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
-                  {data?.length}
-                </span>
+                {Boolean(data?.length) && (
+                  <span className="cartNumber bg-red-600 text-xs md:text-sm rounded-full block absolute bottom-0 right-0 aspect-square p-1">
+                    {data?.length}
+                  </span>
+                )}
                 <div>
                   <FaCartShopping />
                 </div>
