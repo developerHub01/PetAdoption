@@ -20,10 +20,7 @@ const AllPets = () => {
     queryFn: () =>
       adminAxios
         .get(`/pet?numberOfUser=${numberOfUser}&page=${page}`)
-        .then((res) => res.data)
-        .catch((error) => {
-          navigate("/unauthorizeToken", { replace: true });
-        }),
+        .then((res) => res.data),
     keepPreviousData: true,
   });
   const pets = data?.data;

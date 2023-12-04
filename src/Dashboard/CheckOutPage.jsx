@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPrivate from "../AxiosInstance/useAxiosPrivate";
 import Payment from "./Payment/Payment";
-import useTotalCost from "../useCustomHooks/useTotalCost";
 import { useQuery } from "@tanstack/react-query";
 const tableHeadingList = ["Pet Name", "Pet Image", "Donation amount", "Remove"];
 const CheckOutPage = () => {

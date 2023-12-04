@@ -92,11 +92,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "users",
-        element: (
-          <AdminRoute>
-            <Users />
-          </AdminRoute>
-        ),
+        element: <Users />,
       },
       {
         path: "addpet",
@@ -108,11 +104,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "allpets",
-        element: (
-          <AdminRoute>
-            <AllPets />
-          </AdminRoute>
-        ),
+        element: <AllPets />,
       },
       {
         path: "myaddedpets",
@@ -156,11 +148,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "allcampaign",
-        element: (
-          <AdminRoute>
-            <AllCampaign />
-          </AdminRoute>
-        ),
+        element: <AllCampaign />,
       },
       {
         path: "mycampaign",

@@ -26,19 +26,17 @@ const tableHeadingList = [
 const AllCampaign = () => {
   const numberOfUser = 8;
   const [page, setPage] = useState(0);
-  const adminAxios = useAxiosAdmin(localStorage.getItem("token"));
+  const adminAxios = useAxiosAdmin();
   const navigate = useNavigate();
   const { data, isLoading, isError, refetch, isPreviousData } = useQuery({
     queryKey: ["campaign", page],
     queryFn: () =>
       adminAxios
         .get(`/campaignAdmin?numberOfUser=${numberOfUser}&page=${page}`)
-        .then((res) => res.data)
-        .catch((error) => navigate("/unauthorizeToken", { replace: true })),
+        .then((res) => res.data),
     keepPreviousData: true,
   });
   if (isLoading) return <Loader />;
-  if (isError) console.log(isError.message);
   const campaignList = data?.data;
   const totalCampaign = data?.total;
 

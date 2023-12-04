@@ -4,7 +4,7 @@ import { serverApi } from "../constant/constant";
 const useFetchUsers = () => {
   const response = useQuery({
     queryKey: ["users"],
-    queryFn: () => fetch(`${serverApi}/users?`).then((res) => res.json()),
+    queryFn: () => fetch(`${serverApi}/users`).then((res) => res.json()),
   });
   return response;
 };

@@ -1,4 +1,4 @@
-export const serverApi = "http://localhost:5000";
+export const serverApi = "https://petadopt-ten.vercel.app";
 export const primaryColor = "rgba(63, 65, 26, 1)";
 export const secondaryColor = "#ffffff";
 export const months = [

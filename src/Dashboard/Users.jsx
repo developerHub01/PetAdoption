@@ -22,16 +22,13 @@ const Users = () => {
   const numberOfUser = 8;
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-  const adminAxios = useAxiosAdmin(localStorage.getItem("token"));
+  const adminAxios = useAxiosAdmin();
   const { data, isLoading, isError, refetch, isPreviousData } = useQuery({
     queryKey: ["users", page],
     queryFn: () =>
       adminAxios
         .get(`/users?numberOfUser=${numberOfUser}&page=${page}`)
-        .then((res) => res.data)
-        .catch((error) => {
-          navigate("/unauthorizeToken", { replace: true });
-        }),
+        .then((res) => res.data),
     keepPreviousData: true,
   });
   const users = data?.data;

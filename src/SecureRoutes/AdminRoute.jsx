@@ -17,7 +17,6 @@ const AdminRoute = ({ children }) => {
         .get("/adminCheck")
         .then((res) => res.data)
         .catch((error) => {
-          // navigator("/unauthorizeToken", { replace: true });
           return error;
         }),
   });
