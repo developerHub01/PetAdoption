@@ -14,10 +14,13 @@ const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
   if (!user) return <Loader />;
   const { refetch } = useFetchCartList(user?.email);
 
-  const { email } = user;
+  const { email, displayName, photoURL } = user;
+
+  console.log(user);
 
   const handleDonationSubmit = async (e) => {
     e.preventDefault();
+    console.log(donationAmount);
     if (!donationAmount) {
       return Swal.fire({
         icon: "error",
@@ -30,6 +33,8 @@ const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
         capaignId: campaignId,
         email,
         donatonAmount: donationAmount,
+        fullName: displayName,
+        profilePic: photoURL,
       })
       .then((res) => {
         if (res.data.error) {
