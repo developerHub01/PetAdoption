@@ -16,8 +16,6 @@ const PetCampaignForm = ({ campaignId, setCampaignFormStateOpen }) => {
 
   const { email, displayName, photoURL } = user;
 
-  console.log(user);
-
   const handleDonationSubmit = async (e) => {
     e.preventDefault();
     console.log(donationAmount);
